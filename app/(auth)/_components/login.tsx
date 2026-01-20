@@ -4,8 +4,13 @@ import { Mail, Lock } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoginSchema, LoginData } from "../schema" ;
+import { handleLogin } from "@/lib/actions/auth_actions";
+import { startTransition, useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Login() {
+  const router = useRouter();
+  const [error,setError] = useState()
   const {
     register,
     handleSubmit,
@@ -14,9 +19,16 @@ export default function Login() {
     resolver: zodResolver(LoginSchema),
   });
 
-  const onSubmit = (data: LoginData) => {
-    console.log("Validated Login Data:", data);
-
+  const onSubmit = async (data: LoginData) => {
+    try{
+      const response = await handleLogin(data);
+      if(!response.success){
+        throw new Error(response.message || "Login failed")
+      }
+      startTransition(() => router.push("/dashboard"))
+    }catch(err: any){
+      setError(err.message);
+    }
   };
 
   return (

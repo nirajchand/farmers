@@ -18,5 +18,3 @@ export const RegisterSchema = z.object({
 });
 
 export type RegisterData = z.infer<typeof RegisterSchema>;
-
-

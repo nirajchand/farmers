@@ -4,8 +4,16 @@ import { Mail, Lock, User } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { RegisterSchema, RegisterData } from "../schema";
+import {useState, useTransition } from "react";
+import { handleRegister } from "@/lib/actions/auth_actions";
+import { useRouter } from "next/navigation";
 
 export default function Register() {
+
+  const [isPending, startTransition] = useTransition()
+  const [error, setError] = useState<string | null>(null);
+
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -14,8 +22,16 @@ export default function Register() {
     resolver: zodResolver(RegisterSchema),
   });
 
-  const onSubmit = (data: RegisterData) => {
-    console.log("Validated Register Data:", data);
+  const onSubmit = async (data: RegisterData) => {
+    try{
+      const response = await handleRegister(data);
+      if(!response.success){
+        throw new Error(response.message)
+      }
+      startTransition(()=> router.push("/login"))
+    }catch(err: Error | any){
+      setError(err.message || "Registration Failed")
+    }
   };
 
   return (
