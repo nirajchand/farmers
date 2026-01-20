@@ -25,7 +25,7 @@ export default function Login() {
       if(!response.success){
         throw new Error(response.message || "Login failed")
       }
-      startTransition(() => router.push("/dashboard"))
+      startTransition(() => router.push("/consumer/dashboard"))
     }catch(err: any){
       setError(err.message);
     }
