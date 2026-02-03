@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function UserTable() {
   // Dummy data
   const users = [
@@ -8,7 +10,18 @@ export default function UserTable() {
 
   return (
     <div className="p-6">
-      <h1 className="text-2xl font-bold mb-4">Users</h1>
+
+      {/* Top Section */}
+      <div className="flex justify-between items-center mb-4">
+        <h1 className="text-2xl font-bold">Users</h1>
+
+        <Link href="/admin/users/create">
+          <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">
+            Create User
+          </button>
+        </Link>
+      </div>
+
       <div className="overflow-x-auto">
         <table className="min-w-full bg-white border border-gray-200 rounded-lg">
           <thead className="bg-gray-100">
@@ -20,6 +33,7 @@ export default function UserTable() {
               <th className="py-2 px-4 border-b text-left">Actions</th>
             </tr>
           </thead>
+
           <tbody>
             {users.map((user) => (
               <tr key={user.id} className="hover:bg-gray-50">
@@ -28,12 +42,17 @@ export default function UserTable() {
                 <td className="py-2 px-4 border-b">{user.email}</td>
                 <td className="py-2 px-4 border-b">{user.role}</td>
                 <td className="py-2 px-4 border-b">
-                  <button className="text-blue-500 hover:underline mr-2">Edit</button>
-                  <button className="text-red-500 hover:underline">Delete</button>
+                  <button className="text-blue-500 hover:underline mr-2">
+                    Edit
+                  </button>
+                  <button className="text-red-500 hover:underline">
+                    Delete
+                  </button>
                 </td>
               </tr>
             ))}
           </tbody>
+
         </table>
       </div>
     </div>

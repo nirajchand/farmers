@@ -30,12 +30,7 @@ export default function Sidebar() {
         <Link href="/admin/users" className={linkClass("/admin/users")}>
           Users
         </Link>
-        <Link
-          href="/admin/users/create"
-          className={linkClass("/admin/users/create")}
-        >
-          Create User
-        </Link>
+
       </nav>
 
       {/* Footer / Logout */}

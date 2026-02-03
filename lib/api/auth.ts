@@ -13,7 +13,7 @@ export const register = async(registerData: any) => {
             "Registration Failed"
         )
     }
-}
+};
 
 
 export const login = async (loginData: any) =>{
@@ -27,4 +27,4 @@ export const login = async (loginData: any) =>{
             "Login Failed"
         )
     }
-}
+};

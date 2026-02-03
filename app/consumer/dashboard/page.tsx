@@ -3,7 +3,6 @@ export default function Page() {
         <div>
             <center className="p-20">
             Here in consumer dashboard
-
             </center>
         </div>
     );

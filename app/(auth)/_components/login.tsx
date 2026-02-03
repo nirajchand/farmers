@@ -1,16 +1,17 @@
-'use client';
+"use client";
 
 import { Mail, Lock } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { LoginSchema, LoginData } from "../schema" ;
+import { LoginSchema, LoginData } from "../schema";
 import { handleLogin } from "@/lib/actions/auth_actions";
 import { startTransition, useState } from "react";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 export default function Login() {
   const router = useRouter();
-  const [error,setError] = useState()
+  const [error, setError] = useState();
   const {
     register,
     handleSubmit,
@@ -20,21 +21,26 @@ export default function Login() {
   });
 
   const onSubmit = async (data: LoginData) => {
-    try{
+    try {
+      console.log("hellpoooooo");
       const response = await handleLogin(data);
-      if(!response.success){
-        throw new Error(response.message || "Login failed")
+      console.log("this is response from backend", response);
+      if (!response.success) {
+        toast.error(response.message || "Login failed");
       }
-      startTransition(() => router.push("/consumer/dashboard"))
-    }catch(err: any){
-      setError(err.message);
+      if (response.data.role === "admin") {
+        startTransition(() => router.push("/admin"));
+        return;
+      }
+      startTransition(() => router.push("/consumer/dashboard"));
+    } catch (err: any) {
+      toast.error(err.message || "Something went wrong");
     }
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4">
       <div className="flex flex-col md:flex-row max-w-4xl w-full bg-white shadow-2xl rounded-2xl overflow-hidden">
-
         <div className="md:w-1/2">
           <img
             src="/images/vegetable.jpg"

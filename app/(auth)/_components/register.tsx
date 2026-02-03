@@ -1,16 +1,16 @@
-'use client';
+"use client";
 
 import { Mail, Lock, User } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { RegisterSchema, RegisterData } from "../schema";
-import {useState, useTransition } from "react";
+import { useState, useTransition } from "react";
 import { handleRegister } from "@/lib/actions/auth_actions";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 export default function Register() {
-
-  const [isPending, startTransition] = useTransition()
+  const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | null>(null);
 
   const router = useRouter();
@@ -23,21 +23,22 @@ export default function Register() {
   });
 
   const onSubmit = async (data: RegisterData) => {
-    try{
-      const response = await handleRegister(data);
-      if(!response.success){
-        throw new Error(response.message)
+    try {
+      const payload = { ...data,role:"consumer"}
+      const response = await handleRegister(payload);
+      console.log(response);
+      if (!response.success) {
+        toast.error(response.message || "Registration failed");
       }
-      startTransition(()=> router.push("/login"))
-    }catch(err: Error | any){
-      setError(err.message || "Registration Failed")
+      startTransition(() => router.push("/login"));
+    } catch (err: Error | any) {
+      toast.error(err.message || "Something went wrong");
     }
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4">
       <div className="flex flex-col md:flex-row max-w-4xl w-full bg-white shadow-2xl rounded-2xl overflow-hidden">
-
         <div className="md:w-1/2">
           <img
             src="/images/vegetable.jpg"
