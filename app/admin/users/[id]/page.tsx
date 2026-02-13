@@ -1,12 +1,23 @@
+import ShowConsumerDetails from "../../_components/show.consumer.details";
+import ShowFarmerDetails from "../../_components/show.farmer.details";
+
 export default async function Page({
-    params
+  params,
+  searchParams,
 }: {
-    params: Promise<{ id: string }>;
+  params: { id: string };
+  searchParams: { role?: string };
 }) {
-    const { id } = await params;
-    return (
-        <div>
-            User Details: {id}
-        </div>
-    );
+  const { id } = await params;
+  const { role } = await searchParams;
+  return (
+    <div>
+      {role === "consumer" && (
+        <ShowConsumerDetails userId={id}></ShowConsumerDetails>
+      )}
+      {role === "farmer" &&(
+        <ShowFarmerDetails userId={id} ></ShowFarmerDetails>
+      )}
+    </div>
+  );
 }
