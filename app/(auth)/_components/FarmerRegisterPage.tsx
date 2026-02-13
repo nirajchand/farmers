@@ -24,11 +24,12 @@ export default function Register() {
 
   const onSubmit = async (data: RegisterData) => {
     try {
-      const payload = { ...data,role:"consumer"}
+      const payload = { ...data,role:"farmer"}
       const response = await handleRegister(payload);
       console.log(response);
       if (!response.success) {
         toast.error(response.message || "Registration failed");
+        return;
       }
       startTransition(() => router.push("/login"));
     } catch (err: Error | any) {

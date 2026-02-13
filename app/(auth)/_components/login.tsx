@@ -8,8 +8,11 @@ import { handleLogin } from "@/lib/actions/auth_actions";
 import { startTransition, useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
+import { useAuth } from "@/context/AuthContext";
 
 export default function Login() {
+  const { checkAuth } = useAuth();
+
   const router = useRouter();
   const [error, setError] = useState();
   const {
@@ -22,17 +25,21 @@ export default function Login() {
 
   const onSubmit = async (data: LoginData) => {
     try {
-      console.log("hellpoooooo");
       const response = await handleLogin(data);
-      console.log("this is response from backend", response);
+      await checkAuth();
       if (!response.success) {
         toast.error(response.message || "Login failed");
-      }
-      if (response.data.role === "admin") {
-        startTransition(() => router.push("/admin"));
         return;
       }
-      startTransition(() => router.push("/consumer/dashboard"));
+      if (response.data.role === "admin") {
+        startTransition(() => router.replace("/admin"));
+        return;
+      }
+      if(response.data.role === "consumer"){
+        startTransition(()=> router.replace("/consumer"));
+        return;
+      }
+      startTransition(() => router.push("/farmer"));
     } catch (err: any) {
       toast.error(err.message || "Something went wrong");
     }
@@ -69,7 +76,7 @@ export default function Login() {
               Sign in to your account
             </p>
 
-            <div className="relative mb-1">
+            <div className="relative mb-5">
               <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                 <Mail className="w-5 h-5 text-[#15A305]" />
               </div>
@@ -104,12 +111,15 @@ export default function Login() {
               </p>
             )}
 
-            <button
-              type="button"
-              className="w-full text-right text-[#15A305] font-medium hover:underline mb-6"
-            >
-              Forgot Password?
-            </button>
+            <div className="flex justify-end mb-6">
+              <button
+                type="button"
+                className="text-[#15A305] font-medium hover:underline hover:cursor-pointer"
+                onClick={() => router.push("/request-reset-password")}
+              >
+                Forgot Password?
+              </button>
+            </div>
 
             <button
               type="submit"
@@ -137,9 +147,23 @@ export default function Login() {
             <div className="text-center mt-8">
               <button
                 type="button"
-                className="text-[#15A305] font-semibold hover:underline"
+                className="text-[#15A305] font-semibold hover:underline hover:cursor-pointer"
+                onClick={() => {
+                  router.push("/register");
+                }}
               >
                 Create new Account
+              </button>
+            </div>
+            <div className="text-center mt-4">
+              <button
+                type="button"
+                className="text-[#15A305]  hover:underline hover:cursor-pointer"
+                onClick={() => {
+                  router.push("/FarmerRegister");
+                }}
+              >
+                Become a Farmer
               </button>
             </div>
           </form>
