@@ -11,11 +11,16 @@ export async function proxy(request: NextRequest) {
   const token = await getAuthToken();
   const user = token ? await getUserData() : null;
 
-  
+  // const isPublicRoute = publicRoutes.some((route) =>
+  //   pathname.startsWith(route),
+  // );
 
   const isPublicRoute = publicRoutes.some((route) =>
     pathname.startsWith(route),
   );
+
+  const isRootRoute = pathname === "/";
+
   const isAdminRoute = adminRoutes.some((route) => pathname.startsWith(route));
   const isConsumerRoute = consumerRoutes.some((route) =>
     pathname.startsWith(route),
@@ -24,7 +29,7 @@ export async function proxy(request: NextRequest) {
     pathname.startsWith(route),
   );
 
-  if (!token && !isPublicRoute) {
+  if (!token && !isPublicRoute && !isRootRoute) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
 
@@ -40,7 +45,7 @@ export async function proxy(request: NextRequest) {
     }
   }
 
-  if (isPublicRoute && token) {
+  if ((isPublicRoute || isRootRoute) && token) {
     const role = user?.role;
 
     if (role === "admin") {
@@ -64,6 +69,7 @@ export async function proxy(request: NextRequest) {
 
 export const config = {
   matcher: [
+    "/",
     "/admin/:path*",
     "/consumer/:path*",
     "/farmer/:path*",

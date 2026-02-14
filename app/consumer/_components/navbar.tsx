@@ -7,10 +7,9 @@ import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
 
 export default function Navbar() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [cartCount] = useState(3);
   const { logout } = useAuth();
-  const router = useRouter()
+  const router = useRouter();
   const handleLogout = async () => {
     await logout();
   };
@@ -76,7 +75,7 @@ export default function Navbar() {
               {/* Dropdown */}
               <div className="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-xl border border-green-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
                 <Link
-                  href="/profile"
+                  href="/consumer/profile"
                   className="block px-4 py-3 text-gray-700 hover:bg-green-50 hover:text-green-600 rounded-t-xl"
                 >
                   My Profile
@@ -99,48 +98,9 @@ export default function Navbar() {
                 </button>
               </div>
             </div>
-
-            {/* Mobile Menu Button */}
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden p-2.5 rounded-xl hover:bg-green-50 transition-colors"
-            >
-              {mobileMenuOpen ? (
-                <X className="w-6 h-6 text-gray-700" />
-              ) : (
-                <Menu className="w-6 h-6 text-gray-700" />
-              )}
-            </button>
           </div>
         </div>
       </div>
-
-      {/* Mobile Menu */}
-      {mobileMenuOpen && (
-        <div className="lg:hidden border-t border-green-100 bg-white/95 backdrop-blur-md">
-          <div className="px-4 py-4 space-y-3">
-            {/* Mobile Search */}
-            <div className="flex items-center gap-2 px-4 py-3 bg-green-50 rounded-xl">
-              <Search className="w-5 h-5 text-green-600" />
-              <input
-                type="text"
-                placeholder="Search products..."
-                className="flex-1 bg-transparent outline-none text-gray-700 placeholder-gray-500"
-              />
-            </div>
-
-            {/* Mobile Account */}
-            <Link
-              href="/profile"
-              onClick={() => setMobileMenuOpen(false)}
-              className="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-700 hover:bg-green-50 hover:text-green-600"
-            >
-              <User className="w-5 h-5" />
-              <span className="font-medium">My Account</span>
-            </Link>
-          </div>
-        </div>
-      )}
     </nav>
   );
 }
