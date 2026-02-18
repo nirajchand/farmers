@@ -23,7 +23,7 @@ export default function EditConsumer({ userId }: { userId: string }) {
   const router = useRouter();
 
   // React Hook Form setup
-  const { register, handleSubmit, control, reset, setValue, watch } =
+  const { register, handleSubmit, control, reset } =
     useForm<EditConsumerProfile>({
       resolver: zodResolver(editConsumerProfile),
     });
@@ -35,7 +35,12 @@ export default function EditConsumer({ userId }: { userId: string }) {
         const { data } = await handleGetConsumerById(userId);
         setUser(data);
         reset(data); // initialize form with fetched data
-        setPreview(data.profile_image); // show current profile image
+        // setPreview(data.profile_image);
+        setPreview(
+          data.profile_image
+            ? process.env.NEXT_PUBLIC_API_BASE_URL + data.profile_image
+            : null,
+        ); // show current profile image
       } catch (error: any) {
         toast.error(error.message || "Failed to fetch user profile");
       }
@@ -48,9 +53,15 @@ export default function EditConsumer({ userId }: { userId: string }) {
   // Handle form submission
   const onSubmit = async (data: EditConsumerProfile) => {
     try {
-      const payload = { ...data, role: "consumer" };
-      const response = await handleUpdateUser(userId, payload);
-      console.log("sending data:", response);
+      const formData = new FormData();
+
+      Object.entries(data).forEach(([key, value]) => {
+        if (value !== undefined && value !== null) {
+          formData.append(key, value as any);
+        }
+      });
+
+      const response = await handleUpdateUser(userId, formData);
 
       if (!response.success) {
         toast.error(response.message || "Update failed");
@@ -105,10 +116,7 @@ export default function EditConsumer({ userId }: { userId: string }) {
           <div className="flex flex-col items-center mb-8 pb-8 border-b border-gray-200">
             <div className="relative">
               <img
-                src={
-                  `${process.env.NEXT_PUBLIC_API_BASE_URL}${preview}` ||
-                  "/images/Portrait_Placeholder.png"
-                }
+                src={preview || "/images/Portrait_Placeholder.png"}
                 alt="Profile"
                 className="w-32 h-32 rounded-full object-cover border-4 border-green-100 shadow-lg"
               />

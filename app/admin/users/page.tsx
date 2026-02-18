@@ -1,23 +1,6 @@
 import { handleGetAllUser } from "@/lib/actions/admin/user_action";
 import UserTable from "../_components/user.table";
 
-// export default async function Page() {
-//   const response = await handleGetAllUser();
-
-//   if (!response.success) {
-//     throw new Error(response.message || "Failed to load user data");
-//   }
-
-//   if (!response.data) {
-//     throw new Error("No User found");
-//   }
-
-//   return (
-//     <div>
-//       <UserTable data={response.data}></UserTable>
-//     </div>
-//   );
-// }
 
 export default async function Page({
   searchParams,

@@ -16,18 +16,26 @@ import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
-import { editFarmerProfile, EditFarmerProfile } from "@/app/farmer/editProfile/schema";
-import { handleGetFarmerById, handleUpdateUser } from "@/lib/actions/admin/user_action";
+import {
+  editFarmerProfile,
+  EditFarmerProfile,
+} from "@/app/farmer/editProfile/schema";
+import {
+  handleGetFarmerById,
+  handleUpdateUser,
+} from "@/lib/actions/admin/user_action";
 
-export default function EditFarmer({userId}: {userId: string}) {
-  const { register, handleSubmit, control, reset } = useForm<EditFarmerProfile>({
-    resolver: zodResolver(editFarmerProfile),
-  });
+export default function EditFarmer({ userId }: { userId: string }) {
+  const { register, handleSubmit, control, reset } = useForm<EditFarmerProfile>(
+    {
+      resolver: zodResolver(editFarmerProfile),
+    },
+  );
 
   const [user, setUser] = useState<EditFarmerProfile | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const router = useRouter()
+  const router = useRouter();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -35,7 +43,11 @@ export default function EditFarmer({userId}: {userId: string}) {
         const { data } = await handleGetFarmerById(userId);
         setUser(data);
         reset(data); // populate the form with fetched data
-        setPreview(data.profile_image ? process.env.NEXT_PUBLIC_API_BASE_URL + data.profile_image : null);
+        setPreview(
+          data.profile_image
+            ? process.env.NEXT_PUBLIC_API_BASE_URL + data.profile_image
+            : null,
+        );
       } catch (error: any) {
         toast.error(error.message || "Data not found!");
       }
@@ -49,7 +61,7 @@ export default function EditFarmer({userId}: {userId: string}) {
 
   const handleImageChange = (
     file: File | undefined,
-    onChange: (file: File | undefined) => void
+    onChange: (file: File | undefined) => void,
   ) => {
     if (file) {
       const reader = new FileReader();
@@ -69,7 +81,15 @@ export default function EditFarmer({userId}: {userId: string}) {
 
   const onSubmit = async (data: EditFarmerProfile) => {
     try {
-      await handleUpdateUser(userId,data);
+      const formData = new FormData();
+
+      Object.entries(data).forEach(([key, value]) => {
+        if (value !== undefined && value !== null) {
+          formData.append(key, value as any);
+        }
+      });
+
+      await handleUpdateUser(userId, formData);
       toast.success("Profile updated successfully!");
       reset(data);
     } catch (error: any) {
@@ -117,7 +137,9 @@ export default function EditFarmer({userId}: {userId: string}) {
                     ref={fileInputRef}
                     accept=".jpg,.jpeg,.png,.webp"
                     className="hidden" // hide input
-                    onChange={(e) => handleImageChange(e.target.files?.[0], onChange)}
+                    onChange={(e) =>
+                      handleImageChange(e.target.files?.[0], onChange)
+                    }
                   />
                   {preview && (
                     <button
@@ -265,8 +287,8 @@ export default function EditFarmer({userId}: {userId: string}) {
               <button
                 type="submit"
                 className="flex-1 px-6 py-3 bg-green-600 text-white rounded-lg font-medium hover:bg-green-700 transition-colors shadow-md flex items-center justify-center gap-2"
-                onClick={()=>{
-                  router.replace("/admin/users")
+                onClick={() => {
+                  router.replace("/admin/users");
                 }}
               >
                 <Save className="w-5 h-5" />

@@ -1,4 +1,7 @@
-import { getFarmerProfile, updateFarmerProfile } from "@/lib/api/farmer/FarmerProfile";
+import {
+  getFarmerProfile,
+  updateFarmerProfile,
+} from "@/lib/api/farmer/FarmerProfile";
 
 export async function handleGetFarmerProfile() {
   try {
@@ -43,3 +46,5 @@ export async function handleUpdateFarmerProfile(data: any) {
     };
   }
 }
+
+

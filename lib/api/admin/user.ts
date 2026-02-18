@@ -63,7 +63,6 @@ export const getFarmerById = async (userId: string) => {
 };
 export const updateUser = async (userId: string, updatedData: any) => {
   try {
-    console.log("here in actions: ", updatedData, userId);
     const response = await axiosInstance.put(
       API.ADMIN.USER.UPDATEUSER(userId),
       updatedData,
