@@ -1,3 +1,4 @@
+import { getProductById } from "@/lib/api/farmer/product";
 import { addProduct, deleteProduct, getFarmersProduct } from "@/lib/api/farmer/product";
 
 export async function handleAddProduct(data: any) {
@@ -45,6 +46,8 @@ export async function handleGetFarmersProduct() {
   }
 };
 
+
+
 export async function handledeleteProduct(productId: string) {
   try {
     const result = await deleteProduct(productId);
@@ -67,5 +70,28 @@ export async function handledeleteProduct(productId: string) {
     };
   }
 }
+
+
+export async function handleGetProductById(productId: string) {
+  try {
+    const result = await getProductById(productId);
+    if (result.success) {
+      return {
+        success: true,
+        message: "Product fetched",
+        data: result.data,
+      };
+    }
+    return {
+      success: false,
+      message: result.message || "product fetch Failed",
+    };
+  } catch (e: Error | any) {
+    return {
+      success: false,
+      message: e.message || "product fetch failed",
+    };
+  }
+};
 
 
