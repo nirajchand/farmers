@@ -20,7 +20,7 @@ export default function MyCrops() {
     const fetchProducts = async () => {
       try {
         const res = await handleGetFarmersProduct();
-        console.log("hre is he00",res)
+        console.log("hre is he00", res);
         setProducts(res.data);
       } catch (err: Error | any) {
         toast.error(err.message || "Failed to fetch products");
@@ -97,7 +97,10 @@ export default function MyCrops() {
                 key={crop._id}
                 className={`border-b border-green-100 ${
                   index % 2 === 0 ? "bg-white" : "bg-green-50"
-                } hover:bg-green-100 transition-colors`}
+                } hover:bg-green-100 transition-colors hover:cursor-pointer`}
+                onClick={() => {
+                  router.push(`/farmer/${crop._id}`);
+                }}
               >
                 <td className="p-4 font-semibold text-green-800">
                   {crop.productName}
@@ -125,7 +128,13 @@ export default function MyCrops() {
                     : "N/A"}
                 </td>
                 <td className="p-4 flex gap-2">
-                  <button className="p-2 rounded-lg bg-green-50 hover:bg-green-100 transition">
+                  <button
+                    className="p-2 rounded-lg bg-green-50 hover:bg-green-100 transition hover:cursor-pointer"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      router.push(`/farmer/${crop._id}/edit`);
+                    }}
+                  >
                     <Edit className="w-4 h-4 text-green-600" />
                   </button>
                   <button
