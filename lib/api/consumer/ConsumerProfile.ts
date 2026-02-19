@@ -22,3 +22,5 @@ export const updateConsumerProfile = async (updatedData: any) => {
         throw new Error(e.message || "Profile update failed")
     }
 }
+
+

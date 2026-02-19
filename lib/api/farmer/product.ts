@@ -31,3 +31,17 @@ export const deleteProduct = async (productId: string) => {
     throw new Error(e.message || "Product delete failed");
   }
 };
+
+export const getProductById = async (productId: string) => {
+  try {
+    const reponse = await axios.get(
+      API.FARMER.PRODUCTS.GETPRODUCTBYID(productId),
+    );
+    return reponse.data;
+  } catch (e: Error | any) {
+    throw new Error(e.message || "Profile fetch failed");
+  }
+};
+
+
+

@@ -24,14 +24,18 @@ export const API = {
     PRODUCTS: {
       ADDPRODUCT: "/api/farmer/product/addProduct",
       GETPRODUCTS: "/api/farmer/product/farmerProducts",
-      DELETEPRODUCTS:(productId: string) => `/api/farmer/product/${productId}`,
+      DELETEPRODUCTS: (productId: string) => `/api/farmer/product/${productId}`,
+      GETPRODUCTBYID: (productId: string) => `/api/farmer/product/${productId}`,
     },
-
   },
   CONSUMER: {
     PROFILE: {
       GETPROFILE: "/api/consumer/getProfile",
       UPDATEPROFILE: "/api/consumer/updateProfile",
+    },
+    PRODUCTS: {
+      GETPRODUCTS: "/api/consumer/products",
+      GETPRODUCTBYID: (productId: string) => `/api/consumer/${productId}`,
     },
   },
 };
