@@ -16,7 +16,7 @@ export const productDetails = z.object({
   description: z.string().trim(),
   product_image: z.string().optional(),
   updatedAt: z.string().optional(),
-  _id: z.string().optional(),
+  _id: z.string(),
 });
 
 export type ProductDetails = z.infer<typeof productDetails>;

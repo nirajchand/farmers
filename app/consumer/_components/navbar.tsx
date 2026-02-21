@@ -48,7 +48,7 @@ export default function Navbar() {
           <div className="flex items-center gap-3 shrink-0">
             {/* Cart */}
             <Link
-              href="/cart"
+              href="/consumer/cart"
               className="relative p-2.5 rounded-xl hover:bg-green-50 transition-all duration-200 group"
             >
               <ShoppingCart className="w-6 h-6 text-gray-700 group-hover:text-green-600 transition-colors" />
