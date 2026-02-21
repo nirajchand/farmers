@@ -37,5 +37,14 @@ export const API = {
       GETPRODUCTS: "/api/consumer/products",
       GETPRODUCTBYID: (productId: string) => `/api/consumer/${productId}`,
     },
+    CART:{
+      GETCART: "/api/consumer/cart/getCart",
+      ADDTOCART:"/api/consumer/cart/add",
+      UPDATECARTITEM:"/api/consumer/cart/update",
+      REMOVEFROMCART:(cartItemId: string) => `/api/consumer/cart/remove/${cartItemId}`,
+    },
+    ORDER:{
+      PLACEORDER: "/api/consumer/order/placeOrder",
+    }
   },
 };
