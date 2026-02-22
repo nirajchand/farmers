@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { FaTrash } from "react-icons/fa";
 import { useRouter } from "next/navigation";
+import { useCart } from "@/context/CartContext";
 
 interface CartItem {
   _id: string; // Cart item ID
@@ -21,6 +22,7 @@ interface CartItem {
 export default function CartPage() {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const router = useRouter();
+  const { refreshCart } = useCart();
 
   // Fetch cart on page load
   useEffect(() => {
@@ -110,6 +112,7 @@ export default function CartPage() {
           items.filter((item) => item._id !== cartItemId),
         );
         toast.success("Item removed successfully");
+        refreshCart();
       } else {
         toast.error(response.message);
       }
@@ -225,10 +228,12 @@ export default function CartPage() {
                 <span>Rs. {totalAmount}</span>
               </div>
 
-              <button className="w-full mt-6 bg-green-600 hover:bg-green-700 text-white py-3 rounded-lg font-semibold transition"
-              onClick={()=>{
-                router.push("/consumer/checkout")
-              }}>
+              <button
+                className="w-full mt-6 bg-green-600 hover:bg-green-700 text-white py-3 rounded-lg font-semibold transition"
+                onClick={() => {
+                  router.push("/consumer/checkout");
+                }}
+              >
                 Proceed to Checkout
               </button>
             </div>

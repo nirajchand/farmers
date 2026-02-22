@@ -1,23 +1,24 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
-import { ShoppingCart, User, Menu, X, Search } from "lucide-react";
+import { useState, useEffect } from "react";
+import { ShoppingCart, User, Search } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
-import { useRouter } from "next/navigation";
+import { useCart } from "@/context/CartContext";
 
 export default function Navbar() {
-  const [cartCount] = useState(3);
   const { logout } = useAuth();
-  const router = useRouter();
+  const { cartCount } = useCart();
+
+
   const handleLogout = async () => {
     await logout();
   };
 
+
   return (
     <nav className="bg-white/95 backdrop-blur-md shadow-lg sticky top-0 z-50 border-b border-green-100/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Main Navbar */}
         <div className="flex items-center justify-between h-25 gap-6">
           {/* Logo */}
           <Link href="/consumer" className="flex items-center gap-3 shrink-0">
@@ -31,11 +32,10 @@ export default function Navbar() {
             </span>
           </Link>
 
-          {/* Center Search Bar */}
+          {/* Search Bar */}
           <div className="hidden md:flex flex-1 justify-center">
             <div className="flex items-center bg-green-50 rounded-xl px-4 py-2 w-full max-w-2xl hover:bg-green-100 focus-within:ring-2 focus-within:ring-green-500 transition-all duration-200">
               <Search className="w-5 h-10 text-green-600 mr-2" />
-
               <input
                 type="text"
                 placeholder="Search fresh vegetables, fruits..."
@@ -44,17 +44,13 @@ export default function Navbar() {
             </div>
           </div>
 
-          {/* Right Side Actions */}
+          {/* Right Actions */}
           <div className="flex items-center gap-3 shrink-0">
             {/* Cart */}
-            <Link
-              href="/consumer/cart"
-              className="relative p-2.5 rounded-xl hover:bg-green-50 transition-all duration-200 group"
-            >
-              <ShoppingCart className="w-6 h-6 text-gray-700 group-hover:text-green-600 transition-colors" />
-
+            <Link href="/consumer/cart" className="relative p-2.5 rounded-xl">
+              <ShoppingCart className="w-6 h-6" />
               {cartCount > 0 && (
-                <span className="absolute -top-1 -right-1 bg-gradient-to-r from-green-500 to-green-600 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center shadow-lg animate-pulse">
+                <span className="absolute -top-1 -right-1 w-5 h-5 flex items-center justify-center rounded-full text-xs font-bold bg-green-600 text-white">
                   {cartCount}
                 </span>
               )}
@@ -66,13 +62,11 @@ export default function Navbar() {
                 <div className="w-8 h-8 bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center">
                   <User className="w-5 h-5 text-white" />
                 </div>
-
                 <span className="text-gray-700 font-medium group-hover:text-green-600 transition-colors">
                   Account
                 </span>
               </button>
 
-              {/* Dropdown */}
               <div className="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-xl border border-green-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
                 <Link
                   href="/consumer/profile"
@@ -82,7 +76,7 @@ export default function Navbar() {
                 </Link>
 
                 <Link
-                  href="/orders"
+                  href="/consumer/orders"
                   className="block px-4 py-3 text-gray-700 hover:bg-green-50 hover:text-green-600"
                 >
                   My Orders

@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { ProductDetails } from "../[id]/schema";
 import { handleAddToCart } from "@/lib/actions/farmer/CartActions";
 import { toast } from "react-toastify";
+import { useCart } from "@/context/CartContext";
 
 export default function ViewProductDetails({
   product,
@@ -13,7 +14,8 @@ export default function ViewProductDetails({
 }) {
   const router = useRouter();
   const [quantity, setQuantity] = useState(1);
-
+    const { refreshCart } = useCart();
+    
   const handleIncrement = () => {
     if (quantity < product.quantity) {
       setQuantity(quantity + 1);
@@ -35,6 +37,7 @@ export default function ViewProductDetails({
 
       if (response) {
         toast.success("Product added to cart");
+        refreshCart();
       } else {
         toast.error("Failed to add to cart");
       }
