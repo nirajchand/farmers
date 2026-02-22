@@ -27,6 +27,10 @@ export const API = {
       DELETEPRODUCTS: (productId: string) => `/api/farmer/product/${productId}`,
       GETPRODUCTBYID: (productId: string) => `/api/farmer/product/${productId}`,
     },
+    ORDERS: {
+      GETORDERS: "/api/farmer/order/farmer",
+      UPDATESTATUS: (orderId: string) => `/api/farmer/order/updateOrderStatus/${orderId}`,
+    }
   },
   CONSUMER: {
     PROFILE: {
@@ -45,6 +49,8 @@ export const API = {
     },
     ORDER:{
       PLACEORDER: "/api/consumer/order/placeOrder",
+      MYORDER: "/api/consumer/order/my",
+      
     }
   },
 };
