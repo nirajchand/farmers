@@ -10,6 +10,7 @@ export const editFarmerProfile = z.object({
   farmLocation: z.string().optional(),
   phoneNumber: z.string().optional(),
   profile_image: z.any().optional(),
+  createdAt: z.string().optional()
 });
 
 export type EditFarmerProfile = z.infer<typeof editFarmerProfile>

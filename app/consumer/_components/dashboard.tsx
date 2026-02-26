@@ -1,6 +1,6 @@
 "use client"; // only if needed (Image works fine either way)
 
-import { Product } from "@/app/farmer/crops/schema";
+import { Product } from "@/app/farmer/schema";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 export default function DashboardPage({

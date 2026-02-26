@@ -14,6 +14,19 @@ export const addProduct = async (data: any) => {
   }
 };
 
+export const updateProduct = async (data: any, productId: string) => {
+  try {
+    const reponse = await axios.put(API.FARMER.PRODUCTS.UPDATEPRODUCT(productId), data, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    return reponse.data;
+  } catch (e: Error | any) {
+    throw new Error(e.message || "Product update failed");
+  }
+};
+
 export const getFarmersProduct = async () => {
   try {
     const reponse = await axios.get(API.FARMER.PRODUCTS.GETPRODUCTS);

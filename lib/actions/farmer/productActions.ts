@@ -1,4 +1,4 @@
-import { getProductById } from "@/lib/api/farmer/product";
+import { getProductById, updateProduct } from "@/lib/api/farmer/product";
 import { addProduct, deleteProduct, getFarmersProduct } from "@/lib/api/farmer/product";
 
 export async function handleAddProduct(data: any) {
@@ -19,6 +19,28 @@ export async function handleAddProduct(data: any) {
     return {
       success: false,
       message: e.message || "product add failed",
+    };
+  }
+}
+
+export async function handleUpdateProduct(data: any, productId: string) {
+  try {
+    const result = await updateProduct(data,productId);
+    if (result.success) {
+      return {
+        success: true,
+        message: "Product updated",
+        data: result.data,
+      };
+    }
+    return {
+      success: false,
+      message: result.message || "product update Failed",
+    };
+  } catch (e: Error | any) {
+    return {
+      success: false,
+      message: e.message || "product update failed",
     };
   }
 }

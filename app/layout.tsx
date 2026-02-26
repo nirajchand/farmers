@@ -4,6 +4,7 @@ import "./global.css";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AuthProvider } from "@/context/AuthContext";
+import { CartProvider } from "@/context/CartContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,8 +32,13 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased `}
       >
         <AuthProvider>
-        {children}
-        <ToastContainer position="top-center" autoClose ={3000}></ToastContainer>
+          <CartProvider>
+            {children}
+            <ToastContainer
+              position="top-center"
+              autoClose={3000}
+            ></ToastContainer>
+          </CartProvider>
         </AuthProvider>
       </body>
     </html>

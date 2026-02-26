@@ -8,22 +8,32 @@ import { toast } from "react-toastify";
 import { EditFarmerProfile } from "../editProfile/schema";
 
 export default function ProfilePage() {
-
   const [user, setUser] = useState<EditFarmerProfile | null>(null);
   const router = useRouter();
 
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const {data} = await handleGetFarmerProfile();
+        const { data } = await handleGetFarmerProfile();
         setUser(data);
       } catch (error: Error | any) {
         toast.error(error.message || "Failed to fetch user");
       }
     };
     fetchProfile();
-  },[]);
+  }, []);
 
+
+  // const handleproductListed = async () =>{
+  //   try{
+  //     const response = 
+
+  //   }catch(err: Error | any){
+  //     throw new Error(err.message || "Something went wrong")
+  //   }
+  // }
+
+  
   // Loading state
   if (!user) {
     return <p className="text-center mt-10">Loading profile...</p>;
@@ -41,7 +51,10 @@ export default function ProfilePage() {
               {/* Profile Image */}
               <div className="relative">
                 <img
-                  src={process.env.NEXT_PUBLIC_API_BASE_URL+user.profile_image || "/images/Portrait_Placeholder.png"}
+                  src={
+                    process.env.NEXT_PUBLIC_API_BASE_URL + user.profile_image ||
+                    "/images/Portrait_Placeholder.png"
+                  }
                   className="w-32 h-32 rounded-full object-cover border-4 border-white shadow-xl"
                 />
               </div>
@@ -156,7 +169,11 @@ export default function ProfilePage() {
               <div className="mt-6 grid grid-cols-2 gap-4">
                 <div className="p-4 bg-green-50 rounded-lg">
                   <p className="text-sm text-gray-600 mb-1">Established</p>
-                  <p className="font-semibold text-gray-900">2018</p>
+                  <p className="font-semibold text-gray-900">
+                    {user.createdAt
+                      ? new Date(user.createdAt).getFullYear()
+                      : ""}
+                  </p>
                 </div>
               </div>
             </div>

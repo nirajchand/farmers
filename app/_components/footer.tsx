@@ -54,9 +54,8 @@ export default function Footer() {
             <ul className="space-y-4">
               {[
                 { name: "Home", href: "/" },
-                { name: "Products", href: "/products" },
+                { name: "Products", href: "/login" },
                 { name: "About Us", href: "/about" },
-                { name: "Contact", href: "/contact" },
               ].map((link) => (
                 <li key={link.name}>
                   <Link href={link.href} className="text-gray-600 hover:text-green-600 transition-colors duration-200 flex items-center gap-2 group">
@@ -73,10 +72,8 @@ export default function Footer() {
             <h3 className="text-lg font-bold text-gray-900 mb-6">Support</h3>
             <ul className="space-y-4">
               {[
-                { name: "Help Center", href: "/help" },
-                { name: "Privacy Policy", href: "/privacy" },
+                { name: "Privacy Policy", href: "/terms" },
                 { name: "Terms of Service", href: "/terms" },
-                { name: "FAQ", href: "/faq" },
               ].map((link) => (
                 <li key={link.name}>
                   <Link href={link.href} className="text-gray-600 hover:text-green-600 transition-colors duration-200 flex items-center gap-2 group">
@@ -124,7 +121,7 @@ export default function Footer() {
                   </div>
                   <div>
                     <p className="text-sm font-medium text-gray-900">Address</p>
-                    <p className="text-sm">123 Farm Lane<br />Green Valley, CA 94016</p>
+                    <p className="text-sm">Durbar Marg<br />Kathmandu, Nepal</p>
                   </div>
                 </div>
               </li>

@@ -14,7 +14,6 @@ export default function Login() {
   const { checkAuth } = useAuth();
 
   const router = useRouter();
-  const [error, setError] = useState();
   const {
     register,
     handleSubmit,
@@ -32,7 +31,7 @@ export default function Login() {
         return;
       }
       if (response.data.role === "admin") {
-        startTransition(() => router.replace("/admin"));
+        startTransition(() => router.replace("/admin/users"));
         return;
       }
       if(response.data.role === "consumer"){
@@ -128,7 +127,7 @@ export default function Login() {
               Sign In to Your Account
             </button>
 
-            <div className="flex items-center my-6">
+            {/* <div className="flex items-center my-6">
               <div className="flex-1 border-t border-gray-300"></div>
               <span className="px-4 text-sm font-semibold text-gray-500">
                 OR
@@ -142,7 +141,7 @@ export default function Login() {
             >
               <img src="/images/google.webp" alt="Google" className="w-5 h-5" />
               <span>Continue with Google</span>
-            </button>
+            </button> */}
 
             <div className="text-center mt-8">
               <button

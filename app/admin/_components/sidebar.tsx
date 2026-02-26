@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
-import { LayoutDashboard, Users, LogOut } from "lucide-react";
+import { Users, LogOut } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 
 export default function Sidebar() {
@@ -32,10 +32,6 @@ export default function Sidebar() {
 
       {/* Navigation */}
       <nav className="flex-1 px-4 py-6 space-y-2">
-        <Link href="/admin" className={linkClass("/admin")}>
-          <LayoutDashboard size={18} />
-          Dashboard
-        </Link>
 
         <Link href="/admin/users" className={linkClass("/admin/users")}>
           <Users size={18} />

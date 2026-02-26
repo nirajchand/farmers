@@ -1,4 +1,5 @@
 // app/layout.tsx
+import Footer from "../_components/footer";
 import Navbar from "./_components/navbar";
 export default function RootLayout({
   children,
@@ -9,6 +10,7 @@ export default function RootLayout({
       <section>
         <Navbar />
         {children}
+        <Footer></Footer>
       </section>
   );
 }

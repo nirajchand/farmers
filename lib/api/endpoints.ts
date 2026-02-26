@@ -23,6 +23,7 @@ export const API = {
     },
     PRODUCTS: {
       ADDPRODUCT: "/api/farmer/product/addProduct",
+      UPDATEPRODUCT:(productId: string) => `/api/farmer/product/${productId}`,
       GETPRODUCTS: "/api/farmer/product/farmerProducts",
       DELETEPRODUCTS: (productId: string) => `/api/farmer/product/${productId}`,
       GETPRODUCTBYID: (productId: string) => `/api/farmer/product/${productId}`,

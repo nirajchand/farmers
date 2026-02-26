@@ -5,16 +5,23 @@ import { useState, useEffect } from "react";
 import { ShoppingCart, User, Search } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 import { useCart } from "@/context/CartContext";
+import { useRouter } from "next/navigation";
 
 export default function Navbar() {
   const { logout } = useAuth();
   const { cartCount } = useCart();
 
+  const router = useRouter();
+  const [search, setSearch] = useState("");
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    router.push(`/consumer?search=${search}`);
+  };
 
   const handleLogout = async () => {
     await logout();
   };
-
 
   return (
     <nav className="bg-white/95 backdrop-blur-md shadow-lg sticky top-0 z-50 border-b border-green-100/50">
@@ -35,12 +42,19 @@ export default function Navbar() {
           {/* Search Bar */}
           <div className="hidden md:flex flex-1 justify-center">
             <div className="flex items-center bg-green-50 rounded-xl px-4 py-2 w-full max-w-2xl hover:bg-green-100 focus-within:ring-2 focus-within:ring-green-500 transition-all duration-200">
-              <Search className="w-5 h-10 text-green-600 mr-2" />
-              <input
-                type="text"
-                placeholder="Search fresh vegetables, fruits..."
-                className="bg-transparent outline-none text-gray-700 placeholder-gray-500 w-full"
-              />
+              <form
+                onSubmit={handleSearch}
+                className="flex items-center bg-green-50 rounded-xl px-4 py-2 w-full max-w-2xl "
+              >
+                <Search className="w-5 h-5 text-green-600 mr-2" />
+                <input
+                  type="text"
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  placeholder="Search fresh vegetables, fruits..."
+                  className="bg-transparent outline-none text-gray-700 placeholder-gray-500 w-full"
+                />
+              </form>
             </div>
           </div>
 

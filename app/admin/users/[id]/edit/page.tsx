@@ -1,7 +1,6 @@
 import EditConsumer from "@/app/admin/_components/edit.consumer";
 import EditFarmer from "@/app/admin/_components/edit.farmer";
-import EditConsumerProfilePage from "@/app/consumer/_components/editPage";
-import EditFarmerProfilePage from "@/app/farmer/_components/EditProfile";
+
 
 export default async function Page({
   params,

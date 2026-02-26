@@ -3,31 +3,83 @@
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Product, product } from "../schema";
-import { startTransition, useState } from "react";
+import { startTransition, useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import { useAuth } from "@/context/AuthContext";
-import { handleAddProduct } from "@/lib/actions/farmer/productActions";
+import { useParams, useRouter } from "next/navigation";
+import {
+  handleUpdateProduct,
+  handleGetProductById,
+} from "@/lib/actions/farmer/productActions";
 
-export default function AddProduct() {
+export default function UpdateProductPage({
+  productId,
+}: {
+  productId: string;
+}) {
   const {
     register,
     handleSubmit,
     control,
     reset,
+    setValue,
     formState: { errors },
   } = useForm<Product>({
     resolver: zodResolver(product),
   });
-  const { user } = useAuth();
 
+  const { user } = useAuth();
+  const router = useRouter();
   const [fileName, setFileName] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [currentImage, setCurrentImage] = useState<string | null>(null);
+
+  // Fetch product data on mount
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        if (!productId) return;
+
+        const response = await handleGetProductById(productId);
+
+        if (!response.success) {
+          throw new Error(response.message);
+        }
+
+        const productData = response.data;
+
+        // Populate form with existing data
+        setValue("productName", productData.productName);
+        setValue("price", productData.price);
+        setValue("quantity", productData.quantity);
+        setValue("unitType", productData.unitType);
+        setValue("status", productData.status);
+        setValue("description", productData.description);
+
+        // Set current image if it exists
+        if (productData.product_image) {
+          setCurrentImage(
+            process.env.NEXT_PUBLIC_API_BASE_URL + productData.product_image,
+          );
+        }
+
+        setLoading(false);
+      } catch (error: any) {
+        toast.error(error.message || "Failed to load product");
+        setLoading(false);
+      }
+    };
+
+    fetchProduct();
+  }, [productId, setValue]);
 
   const onSubmit = async (data: Product) => {
     startTransition(async () => {
       try {
         const formData = new FormData();
 
-        // Append fields to form Data
+        // Append fields to FormData
+        formData.append("productId", productId);
         formData.append("farmerId", user._id);
         formData.append("productName", data.productName);
         formData.append("price", data.price.toString());
@@ -36,35 +88,43 @@ export default function AddProduct() {
         formData.append("status", data.status);
         formData.append("description", data.description);
 
-        // Append image if present
+        // Append image only if a new one is selected
         if (data.product_image && data.product_image.length > 0) {
           formData.append("product_image", data.product_image[0]);
         }
 
-        console.log("Here is form data:", formData);
+        const response = await handleUpdateProduct(formData, productId);
 
-        const response = await handleAddProduct(formData);
+        if (!response.success) {
+          throw new Error(response.message || "Product update failed");
+        }
 
-        if (!response.success)
-          throw new Error(response.message || "Product creation failed");
-
-        reset();
-        setFileName("");
-        toast.success("Product created successfully");
-      } catch (e: Error | any) {
-        toast.error(e.message || "Product creation failed");
+        toast.success("Product updated successfully");
+        router.push("/farmer/crops");
+      } catch (e: any) {
+        toast.error(e.message || "Product update failed");
       }
     });
   };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-green-50 to-emerald-50 flex justify-center items-center">
+        <div className="text-green-600 text-xl font-semibold">
+          Loading product...
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 to-emerald-50 flex justify-center items-center p-6">
       <div className="w-full max-w-3xl bg-white shadow-2xl rounded-2xl p-8 border-t-4 border-green-600">
         <div className="mb-6">
           <h2 className="text-3xl font-bold text-green-700 mb-2">
-            Add New Product
+            Edit Product
           </h2>
-          <p className="text-gray-600">Fill in the details to list your product</p>
+          <p className="text-gray-600">Update the details of your product</p>
         </div>
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
@@ -147,6 +207,20 @@ export default function AddProduct() {
           <div>
             <label className="label">Product Image</label>
 
+            {/* Current Image Preview */}
+            {currentImage && !fileName && (
+              <div className="mb-3 border-2 border-green-200 rounded-xl p-3 bg-green-50">
+                <p className="text-sm font-medium text-green-700 mb-2">
+                  Current Image:
+                </p>
+                <img
+                  src={currentImage}
+                  alt="Current product"
+                  className="max-h-48 rounded-lg object-cover"
+                />
+              </div>
+            )}
+
             <Controller
               name="product_image"
               control={control}
@@ -157,7 +231,7 @@ export default function AddProduct() {
                     type="file"
                     accept="image/*"
                     onChange={(e) => {
-                      field.onChange(e.target.files); // store the FileList
+                      field.onChange(e.target.files);
                       const file = e.target.files?.[0];
                       if (file) setFileName(file.name);
                     }}
@@ -168,7 +242,7 @@ export default function AddProduct() {
                     htmlFor="productImage"
                     className="input cursor-pointer flex justify-between items-center"
                   >
-                    <span>{fileName || "Choose Image"}</span>
+                    <span>{fileName || "Choose New Image"}</span>
                   </label>
                 </>
               )}
@@ -177,7 +251,9 @@ export default function AddProduct() {
             {/* Selected File Name + Cancel */}
             {fileName && (
               <div className="flex justify-between items-center mt-3 bg-green-50 border border-green-200 rounded-xl px-4 py-2">
-                <span className="text-sm font-medium text-green-700">{fileName}</span>
+                <span className="text-sm font-medium text-green-700">
+                  {fileName}
+                </span>
                 <button
                   type="button"
                   onClick={() => {
@@ -193,13 +269,22 @@ export default function AddProduct() {
             <p className="error">{errors.product_image?.message?.toString()}</p>
           </div>
 
-          {/* Submit */}
-          <button
-            type="submit"
-            className="w-full bg-gradient-to-r from-green-600 to-emerald-600 text-white py-3 rounded-xl font-semibold hover:from-green-700 hover:to-emerald-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
-          >
-            Save Product
-          </button>
+          {/* Submit + Cancel */}
+          <div className="flex gap-3">
+            <button
+              type="submit"
+              className="flex-1 bg-gradient-to-r from-green-600 to-emerald-600 text-white py-3 rounded-xl font-semibold hover:from-green-700 hover:to-emerald-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+            >
+              Update Product
+            </button>
+            <button
+              type="button"
+              onClick={() => router.back()}
+              className="flex-1 bg-gray-200 text-gray-700 py-3 rounded-xl font-semibold hover:bg-gray-300 transition-all duration-300"
+            >
+              Cancel
+            </button>
+          </div>
         </form>
       </div>
 

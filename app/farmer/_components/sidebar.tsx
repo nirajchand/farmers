@@ -12,7 +12,7 @@ export default function FarmerSidebar() {
       "px-4 py-2 rounded-lg transition-colors font-medium",
       href === pathName
         ? "bg-green-600 text-white" // Active link
-        : "text-green-700 hover:bg-green-50 hover:text-green-600"
+        : "text-green-700 hover:bg-green-50 hover:text-green-600",
     );
 
   return (
@@ -32,22 +32,10 @@ export default function FarmerSidebar() {
       {/* Navigation */}
       <nav className="flex flex-col gap-2">
         <Link href="/farmer" className={linkClass("/farmer")}>
-          Dashboard
-        </Link>
-        <Link href="/farmer/crops" className={linkClass("/farmer/crops")}>
           My Crops
         </Link>
-        <Link href="/orders" className={linkClass("/orders")}>
+        <Link href="/farmer/orders" className={linkClass("/farmer/orders")}>
           Orders
-        </Link>
-        <Link href="/market" className={linkClass("/market")}>
-          Market Prices
-        </Link>
-        <Link href="/notifications" className={linkClass("/notifications")}>
-          Notifications
-        </Link>
-        <Link href="/settings" className={linkClass("/settings")}>
-          Settings
         </Link>
       </nav>
     </div>

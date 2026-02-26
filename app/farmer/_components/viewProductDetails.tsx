@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Product } from "@/app/farmer/crops/schema";
+import { Product } from "@/app/farmer/schema";
 
 export default function ViewProductDetails({ product }: { product: Product }) {
   const router = useRouter();

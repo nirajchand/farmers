@@ -1,9 +1,9 @@
-import FarmerDashboard from "./_components/dashboard";
+import MyCrops from "./_components/mycrops";
 
 export default function Page() {
     return (
         <div>
-            <FarmerDashboard></FarmerDashboard>
+            <MyCrops></MyCrops>
         </div>
     );
 }
