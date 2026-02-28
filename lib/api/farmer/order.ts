@@ -14,7 +14,7 @@ export const getFarmerOrders = async () => {
 
 export const updateOrderStatus = async (orderId: string, orderStatus: string) => {
   try {
-    const reponse = await axiosInstance.patch(
+    const reponse = await axiosInstance.put(
       API.FARMER.ORDERS.UPDATESTATUS(orderId),{
         orderStatus
       }
