@@ -13,14 +13,6 @@ export default async function Page({
 
   const response = await handleGetAllProducts(page, size,search);
 
-  if (!response.success) {
-    throw new Error(response.message || "Failed to load product data");
-  }
-
-  if (!response.data) {
-    throw new Error("No product found");
-  }
-
   return (
     <div>
       <DashboardPage
