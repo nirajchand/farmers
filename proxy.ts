@@ -11,10 +11,6 @@ export async function proxy(request: NextRequest) {
   const token = await getAuthToken();
   const user = token ? await getUserData() : null;
 
-  // const isPublicRoute = publicRoutes.some((route) =>
-  //   pathname.startsWith(route),
-  // );
-
   const isPublicRoute = publicRoutes.some((route) =>
     pathname.startsWith(route),
   );

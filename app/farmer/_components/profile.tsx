@@ -145,12 +145,6 @@ export default function ProfilePage() {
                   <span className="text-sm text-gray-600">Total Sales</span>
                   <span className="text-lg font-bold text-green-600">156</span>
                 </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-sm text-gray-600">Rating</span>
-                  <span className="text-lg font-bold text-green-600">
-                    4.8 ⭐
-                  </span>
-                </div>
               </div>
             </div>
           </div>
