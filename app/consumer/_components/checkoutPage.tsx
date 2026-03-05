@@ -73,14 +73,14 @@ export default function CheckoutPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 px-6 py-10">
+    <div className="min-h-screen bg-[var(--background)] px-6 py-10">
       <div className="max-w-5xl mx-auto">
-        <h1 className="text-3xl font-bold mb-8 text-gray-800">Checkout</h1>
+        <h1 className="text-3xl font-bold mb-8 text-[var(--foreground)]">Checkout</h1>
 
         <div className="grid md:grid-cols-2 gap-8">
           {/* Delivery Form */}
-          <div className="bg-white rounded-xl shadow p-6 space-y-4">
-            <h2 className="text-xl font-semibold text-gray-800 mb-4">
+          <div className="bg-[var(--card-bg)] rounded-xl shadow p-6 space-y-4">
+            <h2 className="text-xl font-semibold text-[var(--foreground)] mb-4">
               Delivery Address
             </h2>
 
@@ -88,12 +88,12 @@ export default function CheckoutPage() {
               placeholder="Address"
               value={shippingAddress}
               onChange={(e) => setAddress(e.target.value)}
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-400"
+              className="w-full border border-[var(--border)] rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[var(--primary)] bg-[var(--input-bg)] text-[var(--foreground)]"
             />
 
             {/* Payment Method */}
             <div className="mt-4">
-              <h3 className="font-semibold text-gray-800 mb-2">
+              <h3 className="font-semibold text-[var(--foreground)] mb-2">
                 Payment Method
               </h3>
               <div className="space-y-2">
@@ -123,22 +123,22 @@ export default function CheckoutPage() {
 
             <button
               onClick={handlePlaceOrder}
-              className="w-full mt-6 bg-green-600 hover:bg-green-700 text-white py-3 rounded-lg font-semibold transition"
+              className="w-full mt-6 bg-[var(--primary)] hover:bg-[var(--primary-dark)] text-white py-3 rounded-lg font-semibold transition"
             >
               Place Order
             </button>
           </div>
 
           {/* Order Summary */}
-          <div className="bg-white rounded-xl shadow p-6 h-fit">
-            <h2 className="text-xl font-semibold mb-4 text-gray-800">
+          <div className="bg-[var(--card-bg)] rounded-xl shadow p-6 h-fit">
+            <h2 className="text-xl font-semibold mb-4 text-[var(--foreground)]">
               Order Summary
             </h2>
 
             {cartItems.map((item) => (
               <div
                 key={item._id}
-                className="flex justify-between mb-3 border-b border-gray-200 pb-2"
+                className="flex justify-between mb-3 border-b border-[var(--border)] pb-2"
               >
                 <div>
                   {item.productName} x {item.quantity}
@@ -147,19 +147,19 @@ export default function CheckoutPage() {
               </div>
             ))}
 
-            <div className="flex justify-between mb-3 font-semibold text-gray-800">
+            <div className="flex justify-between mb-3 font-semibold text-[var(--foreground)]">
               <span>Subtotal</span>
               <span>Rs. {totalAmount}</span>
             </div>
 
-            <div className="flex justify-between mb-3 text-gray-600">
+            <div className="flex justify-between mb-3 text-[var(--secondary-foreground)]">
               <span>Delivery</span>
               <span>Rs. 0</span>
             </div>
 
-            <hr className="my-4" />
+            <hr className="my-4 border-[var(--border)]" />
 
-            <div className="flex justify-between font-bold text-lg text-gray-800">
+            <div className="flex justify-between font-bold text-lg text-[var(--foreground)]">
               <span>Total</span>
               <span>Rs. {totalAmount}</span>
             </div>

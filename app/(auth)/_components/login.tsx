@@ -45,8 +45,8 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4">
-      <div className="flex flex-col md:flex-row max-w-4xl w-full bg-white shadow-2xl rounded-2xl overflow-hidden">
+    <div className="min-h-screen flex items-center justify-center px-4 bg-[var(--background)]">
+      <div className="flex flex-col md:flex-row max-w-4xl w-full bg-[var(--card-bg)] shadow-2xl rounded-2xl overflow-hidden border border-[var(--border)]">
         <div className="md:w-1/2">
           <img
             src="/images/vegetable.jpg"
@@ -68,26 +68,26 @@ export default function Login() {
               />
             </div>
 
-            <h2 className="text-3xl font-bold text-[#15A305] text-center mb-2">
+            <h2 className="text-3xl font-bold text-[var(--primary)] text-center mb-2">
               Welcome Back!
             </h2>
-            <p className="text-center text-[#15A305] mb-8">
+            <p className="text-center text-[var(--primary)] mb-8">
               Sign in to your account
             </p>
 
             <div className="relative mb-5">
               <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                <Mail className="w-5 h-5 text-[#15A305]" />
+                <Mail className="w-5 h-5 text-[var(--primary)]" />
               </div>
               <input
                 type="email"
                 placeholder="Email"
                 {...register("email")}
-                className="w-full pl-12 pr-4 py-3 border border-[#15A305] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#15A305]/30 transition"
+                className="w-full pl-12 pr-4 py-3 border border-[var(--primary)] bg-[var(--input-bg)] text-[var(--foreground)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--primary)]/30 transition placeholder-[var(--secondary-foreground)]"
               />
             </div>
             {errors.email && (
-              <p className="text-red-500 text-sm mb-4">
+              <p className="text-[var(--error)] text-sm mb-4">
                 {errors.email.message}
               </p>
             )}
@@ -95,17 +95,17 @@ export default function Login() {
             {/* Password */}
             <div className="relative mb-1">
               <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                <Lock className="w-5 h-5 text-[#15A305]" />
+                <Lock className="w-5 h-5 text-[var(--primary)]" />
               </div>
               <input
                 type="password"
                 placeholder="Password"
                 {...register("password")}
-                className="w-full pl-12 pr-4 py-3 border border-[#15A305] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#15A305]/30 transition"
+                className="w-full pl-12 pr-4 py-3 border border-[var(--primary)] bg-[var(--input-bg)] text-[var(--foreground)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--primary)]/30 transition placeholder-[var(--secondary-foreground)]"
               />
             </div>
             {errors.password && (
-              <p className="text-red-500 text-sm mb-6">
+              <p className="text-[var(--error)] text-sm mb-6">
                 {errors.password.message}
               </p>
             )}
@@ -113,7 +113,7 @@ export default function Login() {
             <div className="flex justify-end mb-6">
               <button
                 type="button"
-                className="text-[#15A305] font-medium hover:underline hover:cursor-pointer"
+                className="text-[var(--primary)] font-medium hover:underline hover:cursor-pointer"
                 onClick={() => router.push("/request-reset-password")}
               >
                 Forgot Password?
@@ -122,31 +122,15 @@ export default function Login() {
 
             <button
               type="submit"
-              className="w-full bg-[#15A305] text-white font-bold py-3 rounded-lg hover:bg-[#128d04] transition duration-200 shadow-md"
+              className="w-full bg-[var(--primary)] text-white font-bold py-3 rounded-lg hover:bg-[var(--primary-dark)] transition duration-200 shadow-md"
             >
               Sign In to Your Account
             </button>
 
-            {/* <div className="flex items-center my-6">
-              <div className="flex-1 border-t border-gray-300"></div>
-              <span className="px-4 text-sm font-semibold text-gray-500">
-                OR
-              </span>
-              <div className="flex-1 border-t border-gray-300"></div>
-            </div>
-
-            <button
-              type="button"
-              className="w-full flex items-center justify-center gap-3 border border-gray-300 hover:border-[#15A305] py-3 rounded-lg font-medium text-gray-700 hover:bg-gray-50 transition"
-            >
-              <img src="/images/google.webp" alt="Google" className="w-5 h-5" />
-              <span>Continue with Google</span>
-            </button> */}
-
             <div className="text-center mt-8">
               <button
                 type="button"
-                className="text-[#15A305] font-semibold hover:underline hover:cursor-pointer"
+                className="text-[var(--primary)] font-semibold hover:underline hover:cursor-pointer"
                 onClick={() => {
                   router.push("/register");
                 }}
@@ -157,7 +141,7 @@ export default function Login() {
             <div className="text-center mt-4">
               <button
                 type="button"
-                className="text-[#15A305]  hover:underline hover:cursor-pointer"
+                className="text-[var(--primary)]  hover:underline hover:cursor-pointer"
                 onClick={() => {
                   router.push("/FarmerRegister");
                 }}

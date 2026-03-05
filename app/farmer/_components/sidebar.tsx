@@ -11,12 +11,12 @@ export default function FarmerSidebar() {
     clsx(
       "px-4 py-2 rounded-lg transition-colors font-medium",
       href === pathName
-        ? "bg-green-600 text-white" // Active link
-        : "text-green-700 hover:bg-green-50 hover:text-green-600",
+        ? "bg-[var(--primary)] text-white" // Active link
+        : "text-[var(--primary)] hover:bg-[var(--primary-light)] hover:text-[var(--primary)]",
     );
 
   return (
-    <div className="w-64 h-screen bg-white shadow-lg flex flex-col p-4">
+    <div className="w-64 h-screen bg-[var(--card-bg)] shadow-lg flex flex-col p-4 border-r border-[var(--border)]">
       {/* Logo */}
       <Link href="/farmer" className="flex items-center gap-3 mb-6 shrink-0">
         <img
@@ -24,7 +24,7 @@ export default function FarmerSidebar() {
           alt="Farmers Logo"
           className="w-12 h-14 object-contain"
         />
-        <span className="text-2xl font-bold bg-gradient-to-r from-green-600 via-green-500 to-green-600 bg-clip-text text-transparent">
+        <span className="text-2xl font-bold bg-gradient-to-r from-[var(--primary)] via-green-500 to-[var(--primary)] bg-clip-text text-transparent">
           Farmers
         </span>
       </Link>

@@ -13,19 +13,19 @@ export default function Sidebar() {
     clsx(
       "flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-200",
       pathName === href
-        ? "bg-white text-green-800 shadow-sm"
-        : "text-green-100 hover:bg-green-700 hover:text-white"
+        ? "bg-[var(--background)] text-[var(--primary)] shadow-sm"
+        : "text-[var(--secondary-foreground)] hover:bg-[var(--card-bg)] hover:text-[var(--primary)]"
     );
 
   return (
-    <aside className="w-64 bg-green-800 text-white flex flex-col shadow-lg">
+    <aside className="w-64 bg-[var(--primary)] text-white flex flex-col shadow-lg">
       
       {/* Header / Branding */}
-      <div className="p-6 border-b border-green-700">
+      <div className="p-6 border-b border-[var(--primary-dark)]">
         <h1 className="text-xl font-semibold tracking-wide">
           Admin Panel
         </h1>
-        <p className="text-xs text-green-200 mt-1">
+        <p className="text-xs text-white/70 mt-1">
           Management Dashboard
         </p>
       </div>
@@ -40,11 +40,11 @@ export default function Sidebar() {
       </nav>
 
       {/* Footer */}
-      <div className="p-4 border-t border-green-700">
-        <div className="flex items-center justify-between bg-green-700/40 rounded-lg px-3 py-2">
+      <div className="p-4 border-t border-[var(--primary-dark)]">
+        <div className="flex items-center justify-between bg-white/10 rounded-lg px-3 py-2">
           <span className="text-sm font-medium"> {user?.fullName || "Admin"}</span>
 
-          <button className="flex items-center gap-1 text-sm bg-white text-green-800 px-3 py-1.5 rounded-md hover:bg-gray-300 hover:cursor-pointer transition"
+          <button className="flex items-center gap-1 text-sm bg-white text-[var(--primary)] px-3 py-1.5 rounded-md hover:bg-gray-200 hover:cursor-pointer transition"
            onClick={() =>{
             logout();
            }}>

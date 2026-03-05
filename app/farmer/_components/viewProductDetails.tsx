@@ -17,18 +17,18 @@ export default function ViewProductDetails({ product }: { product: Product }) {
   };
 
   return (
-    <div className="min-h-screen bg-white flex flex-col items-center justify-center px-6 py-10">
+    <div className="min-h-screen bg-[var(--background)] flex flex-col items-center justify-center px-6 py-10">
       {/* Back Button */}
       <div className="w-full max-w-5xl mb-6">
         <button
           onClick={() => router.back()}
-          className="flex items-center text-green-600 hover:text-green-800 font-semibold"
+          className="flex items-center text-[var(--primary)] hover:text-[var(--primary-dark)] font-semibold"
         >
           <span className="mr-2 text-2xl">←</span> Back
         </button>
       </div>
 
-      <div className="max-w-5xl w-full bg-green-50 rounded-2xl shadow-lg p-8 grid md:grid-cols-2 gap-10">
+      <div className="max-w-5xl w-full bg-[var(--card-bg)] rounded-2xl shadow-lg p-8 grid md:grid-cols-2 gap-10 border border-[var(--border)]">
         {/* Product Image */}
         <div className="flex items-center justify-center">
           {product.product_image ? (
@@ -40,7 +40,7 @@ export default function ViewProductDetails({ product }: { product: Product }) {
               className="rounded-xl object-cover shadow-md"
             />
           ) : (
-            <div className="w-[450px] h-[450px] bg-green-100 rounded-xl flex items-center justify-center text-green-600">
+            <div className="w-[450px] h-[450px] bg-[var(--primary-light)] rounded-xl flex items-center justify-center text-[var(--primary)]">
               No Image Available
             </div>
           )}
@@ -49,11 +49,11 @@ export default function ViewProductDetails({ product }: { product: Product }) {
         {/* Product Info */}
         <div className="flex flex-col justify-between">
           <div>
-            <h1 className="text-3xl font-bold text-green-800 mb-3">
+            <h1 className="text-3xl font-bold text-[var(--foreground)] mb-3">
               {product.productName}
             </h1>
 
-            <p className="text-2xl font-semibold text-green-600 mb-4">
+            <p className="text-2xl font-semibold text-[var(--primary)] mb-4">
               Rs. {product.price} / {product.unitType}
             </p>
 
@@ -62,26 +62,26 @@ export default function ViewProductDetails({ product }: { product: Product }) {
               <span
                 className={`px-4 py-1 text-white rounded-full text-sm font-medium ${
                   product.status === "Ready"
-                    ? "bg-green-600"
+                    ? "bg-[var(--success)]"
                     : product.status === "Growing"
-                      ? "bg-yellow-500"
-                      : "bg-red-500"
+                      ? "bg-[var(--warning)]"
+                      : "bg-[var(--error)]"
                 }`}
               >
                 {product.status}
               </span>
 
-              <span className="bg-green-200 text-green-800 px-4 py-1 rounded-full text-sm font-medium">
+              <span className="bg-[var(--primary-light)] text-[var(--primary)] px-4 py-1 rounded-full text-sm font-medium">
                 Stock: {`${product.quantity} ${product.unitType}`}
               </span>
             </div>
 
             {/* Description */}
-            <div className="bg-white p-4 rounded-lg border border-green-200 shadow-sm">
-              <h3 className="text-lg font-semibold text-green-700 mb-2">
+            <div className="bg-[var(--secondary)] p-4 rounded-lg border border-[var(--border)] shadow-sm">
+              <h3 className="text-lg font-semibold text-[var(--primary)] mb-2">
                 Description
               </h3>
-              <p className="text-gray-700 text-sm leading-relaxed">
+              <p className="text-[var(--secondary-foreground)] text-sm leading-relaxed">
                 {product.description}
               </p>
             </div>

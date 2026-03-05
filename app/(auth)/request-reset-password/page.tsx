@@ -45,14 +45,14 @@ export default function Page() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-[85vh] bg-green-50 px-4">
-      <div className="w-full max-w-md bg-white shadow-lg rounded-2xl p-8 border border-green-100">
+    <div className="flex items-center justify-center min-h-[85vh] bg-[var(--background)] px-4">
+      <div className="w-full max-w-md bg-[var(--card-bg)] shadow-lg rounded-2xl p-8 border border-[var(--border)]">
         {/* Header */}
         <div className="text-center mb-6">
-          <h1 className="text-2xl font-bold text-green-700">
+          <h1 className="text-2xl font-bold text-[var(--primary)]">
             Forgot Password?
           </h1>
-          <p className="text-sm text-gray-500 mt-2">
+          <p className="text-sm text-[var(--secondary-foreground)] mt-2">
             Enter your registered email and we will send you a reset link.
           </p>
         </div>
@@ -63,7 +63,7 @@ export default function Page() {
           <div>
             <label
               htmlFor="email"
-              className="block text-sm font-medium text-gray-700 mb-1"
+              className="block text-sm font-medium text-[var(--foreground)] mb-1"
             >
               Email Address
             </label>
@@ -73,11 +73,11 @@ export default function Page() {
               id="email"
               placeholder="example@email.com"
               {...register("email")}
-              className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition"
+              className="w-full border border-[var(--border)] rounded-lg px-3 py-2 bg-[var(--input-bg)] text-[var(--foreground)] focus:outline-none focus:ring-2 focus:ring-[var(--primary)] focus:border-transparent transition"
             />
 
             {errors.email && (
-              <p className="text-red-500 text-sm mt-1">
+              <p className="text-[var(--error)] text-sm mt-1">
                 {errors.email.message}
               </p>
             )}
@@ -87,17 +87,17 @@ export default function Page() {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full bg-green-600 hover:bg-green-700 text-white font-medium py-2.5 rounded-lg transition disabled:opacity-70 disabled:cursor-not-allowed"
+            className="w-full bg-[var(--primary)] hover:bg-[var(--primary-dark)] text-white font-medium py-2.5 rounded-lg transition disabled:opacity-70 disabled:cursor-not-allowed"
           >
             {isSubmitting ? "Sending..." : "Send Reset Link"}
           </button>
         </form>
 
-        <div className="mt-6 text-center text-sm text-gray-500">
+        <div className="mt-6 text-center text-sm text-[var(--secondary-foreground)]">
           Remembered your password?{" "}
           <Link
             href="/login"
-            className="text-green-600 font-medium hover:underline"
+            className="text-[var(--primary)] font-medium hover:underline"
           >
             Back to login
           </Link>

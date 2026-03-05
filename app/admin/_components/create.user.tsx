@@ -58,8 +58,17 @@ export default function CreateUser() {
         formData.append("confirmPassword", data.confirmPassword);
         formData.append("role", data.role);
 
-        if (data.profile_image)
-          formData.append("profile_image", data.profile_image);
+        if (data.profile_image instanceof File) {
+          formData.append(
+            "profile_image",
+            data.profile_image,
+            data.profile_image.name,
+          );
+        }
+
+        console.log("Create User FormData entries:", [
+          ...formData.entries(),
+        ]);
 
         const response = await handleUserCreate(formData);
         if (!response.success)
@@ -76,10 +85,12 @@ export default function CreateUser() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center p-6">
-      <div className="bg-white shadow-lg rounded-xl w-full max-w-5xl flex flex-col md:flex-row overflow-hidden">
-        <div className="md:w-1/3 bg-green-50 flex flex-col items-center justify-center p-6">
-          <h3 className="text-xl font-semibold mb-4">Profile Image</h3>
+    <div className="min-h-screen bg-[var(--background)] flex items-center justify-center p-6">
+      <div className="bg-[var(--card-bg)] shadow-lg rounded-xl w-full max-w-5xl flex flex-col md:flex-row overflow-hidden border border-[var(--border)]">
+        <div className="md:w-1/3 bg-[var(--primary-light)] flex flex-col items-center justify-center p-6">
+          <h3 className="text-xl font-semibold mb-4 text-[var(--primary)]">
+            Profile Image
+          </h3>
           <img
             src={preview || "/images/Portrait_Placeholder.png"}
             alt="Profile"
@@ -94,7 +105,7 @@ export default function CreateUser() {
                   type="file"
                   ref={fileInputRef}
                   accept=".jpg,.jpeg,.png,.webp"
-                  className="text-sm text-gray-500"
+                  className="text-sm text-[var(--secondary-foreground)]"
                   onChange={(e) =>
                     handleImageChange(e.target.files?.[0], onChange)
                   }
@@ -102,7 +113,7 @@ export default function CreateUser() {
                 {preview && (
                   <button
                     type="button"
-                    className="mt-2 text-red-500 underline"
+                    className="mt-2 text-[var(--error)] underline"
                     onClick={() => handleDismissImage(onChange)}
                   >
                     Remove Image
@@ -115,17 +126,19 @@ export default function CreateUser() {
 
         {/* Form Section */}
         <div className="md:w-2/3 p-8 flex-1">
-          <h2 className="text-3xl font-bold text-center mb-8">Create User</h2>
+          <h2 className="text-3xl font-bold text-center mb-8 text-[var(--foreground)]">
+            Create User
+          </h2>
           <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
             <div>
               <input
                 type="text"
                 placeholder="Full Name"
                 {...register("fullName")}
-                className="w-full border border-gray-300 rounded-lg px-4 py-4 focus:outline-none focus:ring-2 focus:ring-green-400 transition text-lg"
+                className="w-full border border-[var(--border)] rounded-lg px-4 py-4 focus:outline-none focus:ring-2 focus:ring-[var(--primary)] transition text-lg bg-[var(--input-bg)] text-[var(--foreground)]"
               />
               {errors.fullName && (
-                <p className="text-red-500 text-sm mt-1">
+                <p className="text-[var(--error)] text-sm mt-1">
                   {errors.fullName.message}
                 </p>
               )}
@@ -136,10 +149,10 @@ export default function CreateUser() {
                 type="email"
                 placeholder="Email"
                 {...register("email")}
-                className="w-full border border-gray-300 rounded-lg px-4 py-4 focus:outline-none focus:ring-2 focus:ring-green-400 transition text-lg"
+                className="w-full border border-[var(--border)] rounded-lg px-4 py-4 focus:outline-none focus:ring-2 focus:ring-[var(--primary)] transition text-lg bg-[var(--input-bg)] text-[var(--foreground)]"
               />
               {errors.email && (
-                <p className="text-red-500 text-sm mt-1">
+                <p className="text-[var(--error)] text-sm mt-1">
                   {errors.email.message}
                 </p>
               )}
@@ -150,10 +163,10 @@ export default function CreateUser() {
                 type="password"
                 placeholder="Password"
                 {...register("password")}
-                className="w-full border border-gray-300 rounded-lg px-4 py-4 focus:outline-none focus:ring-2 focus:ring-green-400 transition text-lg"
+                className="w-full border border-[var(--border)] rounded-lg px-4 py-4 focus:outline-none focus:ring-2 focus:ring-[var(--primary)] transition text-lg bg-[var(--input-bg)] text-[var(--foreground)]"
               />
               {errors.password && (
-                <p className="text-red-500 text-sm mt-1">
+                <p className="text-[var(--error)] text-sm mt-1">
                   {errors.password.message}
                 </p>
               )}
@@ -164,10 +177,10 @@ export default function CreateUser() {
                 type="password"
                 placeholder="Confirm Password"
                 {...register("confirmPassword")}
-                className="w-full border border-gray-300 rounded-lg px-4 py-4 focus:outline-none focus:ring-2 focus:ring-green-400 transition text-lg"
+                className="w-full border border-[var(--border)] rounded-lg px-4 py-4 focus:outline-none focus:ring-2 focus:ring-[var(--primary)] transition text-lg bg-[var(--input-bg)] text-[var(--foreground)]"
               />
               {errors.confirmPassword && (
-                <p className="text-red-500 text-sm mt-1">
+                <p className="text-[var(--error)] text-sm mt-1">
                   {errors.confirmPassword.message}
                 </p>
               )}
@@ -176,14 +189,14 @@ export default function CreateUser() {
             <div>
               <select
                 {...register("role")}
-                className="w-full border border-gray-300 rounded-lg px-4 py-4 focus:outline-none focus:ring-2 focus:ring-green-400 transition text-lg"
+                className="w-full border border-[var(--border)] rounded-lg px-4 py-4 focus:outline-none focus:ring-2 focus:ring-[var(--primary)] transition text-lg bg-[var(--input-bg)] text-[var(--foreground)]"
               >
                 <option value="">Select Role</option>
                 <option value="farmer">Farmer</option>
                 <option value="consumer">Consumer</option>
               </select>
               {errors.role && (
-                <p className="text-red-500 text-sm mt-1">
+                <p className="text-[var(--error)] text-sm mt-1">
                   {errors.role.message}
                 </p>
               )}
@@ -192,7 +205,7 @@ export default function CreateUser() {
             <button
               type="submit"
               disabled={isSubmitting || pending}
-              className="w-full bg-green-500 text-white font-semibold py-4 rounded-lg hover:bg-green-600 transition text-lg disabled:opacity-50"
+              className="w-full bg-[var(--primary)] text-white font-semibold py-4 rounded-lg hover:bg-[var(--primary-dark)] transition text-lg disabled:opacity-50"
             >
               {isSubmitting || pending ? "Creating..." : "Create User"}
             </button>

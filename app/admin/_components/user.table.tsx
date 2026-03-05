@@ -94,13 +94,13 @@ export default function UserTable({
   };
 
   return (
-    <div className="p-6">
+    <div className="p-6 bg-[var(--background)] min-h-screen">
       {/* Top Section */}
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold">Users</h1>
+        <h1 className="text-2xl font-bold text-[var(--foreground)]">Users</h1>
 
         <Link href="/admin/users/create">
-          <button className="bg-[#15A305] text-white px-4 py-2 rounded hover:bg-[#008000] transition">
+          <button className="bg-[var(--primary)] text-white px-4 py-2 rounded hover:bg-[var(--primary-dark)] transition">
             Create User
           </button>
         </Link>
@@ -108,9 +108,9 @@ export default function UserTable({
 
       {/* Stats Section */}
       <div className="grid grid-cols-3 gap-4 mb-6">
-        <div className="bg-white rounded-lg shadow-md border border-green-100 p-4">
-          <p className="text-gray-600 text-sm font-medium mb-1">Total Users</p>
-          <p className="text-3xl font-bold text-green-600">{stats.total}</p>
+        <div className="bg-[var(--card-bg)] rounded-lg shadow-md border border-[var(--border)] p-4">
+          <p className="text-[var(--secondary-foreground)] text-sm font-medium mb-1">Total Users</p>
+          <p className="text-3xl font-bold text-[var(--primary)]">{stats.total}</p>
         </div>
       </div>
 
@@ -120,8 +120,8 @@ export default function UserTable({
           onClick={() => handleFilterChange("all")}
           className={`px-4 py-2 rounded-lg font-medium transition ${
             activeFilter === "all"
-              ? "bg-green-600 text-white"
-              : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+              ? "bg-[var(--primary)] text-white"
+              : "bg-[var(--secondary)] text-[var(--foreground)] hover:bg-[var(--secondary)]/80"
           }`}
         >
           All Users
@@ -131,8 +131,8 @@ export default function UserTable({
           onClick={() => handleFilterChange("farmer")}
           className={`px-4 py-2 rounded-lg font-medium transition ${
             activeFilter === "farmer"
-              ? "bg-blue-600 text-white"
-              : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+              ? "bg-[var(--info)] text-white"
+              : "bg-[var(--secondary)] text-[var(--foreground)] hover:bg-[var(--secondary)]/80"
           }`}
         >
           Farmers ({stats.farmers})
@@ -142,17 +142,17 @@ export default function UserTable({
           onClick={() => handleFilterChange("consumer")}
           className={`px-4 py-2 rounded-lg font-medium transition ${
             activeFilter === "consumer"
-              ? "bg-purple-600 text-white"
-              : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+              ? "bg-[var(--warning)] text-white"
+              : "bg-[var(--secondary)] text-[var(--foreground)] hover:bg-[var(--secondary)]/80"
           }`}
         >
           Consumers ({stats.consumers})
         </button>
       </div>
 
-      <div className="overflow-x-auto bg-white shadow-md rounded-xl border border-green-100">
-        <table className="min-w-full text-sm text-left text-gray-700">
-          <thead className="bg-green-600 text-white uppercase text-xs tracking-wider">
+      <div className="overflow-x-auto bg-[var(--card-bg)] shadow-md rounded-xl border border-[var(--border)]">
+        <table className="min-w-full text-sm text-left text-[var(--foreground)]">
+          <thead className="bg-[var(--primary)] text-white uppercase text-xs tracking-wider">
             <tr>
               <th className="py-3 px-6">ID</th>
               <th className="py-3 px-6">Name</th>
@@ -162,26 +162,26 @@ export default function UserTable({
             </tr>
           </thead>
 
-          <tbody className="divide-y divide-green-50">
+          <tbody className="divide-y divide-[var(--border)]">
             {filteredUsers.length > 0 ? (
               filteredUsers.map((user) => (
                 <tr
                   key={user._id}
-                  className="hover:bg-green-50 transition duration-150 cursor-pointer"
+                  className="hover:bg-[var(--secondary)] transition duration-150 cursor-pointer"
                   onClick={() =>
                     router.push(`/admin/users/${user._id}?role=${user.role}`)
                   }
                 >
-                  <td className="py-4 px-6 font-medium text-gray-900">
+                  <td className="py-4 px-6 font-medium text-[var(--foreground)]">
                     {user._id}
                   </td>
 
-                  <td className="py-4 px-6">{user.fullName}</td>
+                  <td className="py-4 px-6 text-[var(--foreground)]">{user.fullName}</td>
 
-                  <td className="py-4 px-6 text-gray-600">{user.email}</td>
+                  <td className="py-4 px-6 text-[var(--secondary-foreground)]">{user.email}</td>
 
                   <td className="py-4 px-6">
-                    <span className="px-3 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-700">
+                    <span className="px-3 py-1 text-xs font-semibold rounded-full bg-[var(--primary-light)] text-[var(--primary)]">
                       {user.role}
                     </span>
                   </td>
@@ -189,7 +189,7 @@ export default function UserTable({
                   {/* Actions */}
                   <td className="py-4 px-6 flex justify-center gap-2">
                     <button
-                      className="px-3 py-1.5 text-sm font-medium text-green-700 border border-green-200 rounded-lg hover:bg-green-100 transition"
+                      className="px-3 py-1.5 text-sm font-medium text-[var(--primary)] border border-[var(--primary-light)] rounded-lg hover:bg-[var(--primary-light)] transition"
                       onClick={(e) => {
                         e.stopPropagation();
                         router.push(
@@ -201,7 +201,7 @@ export default function UserTable({
                     </button>
 
                     <button
-                      className="px-3 py-1.5 text-sm font-medium text-red-600 border border-red-200 rounded-lg hover:bg-red-50 transition"
+                      className="px-3 py-1.5 text-sm font-medium text-[var(--error)] border border-[var(--error-light)] rounded-lg hover:bg-[var(--error-light)] transition"
                       onClick={(e) => handleDeleteClick(user, e)}
                     >
                       Delete
@@ -211,7 +211,7 @@ export default function UserTable({
               ))
             ) : (
               <tr>
-                <td colSpan={5} className="py-8 px-6 text-center text-gray-500">
+                <td colSpan={5} className="py-8 px-6 text-center text-[var(--secondary-foreground)]">
                   No users found
                 </td>
               </tr>
@@ -229,15 +229,15 @@ export default function UserTable({
               className={`px-4 py-2 rounded-lg border text-sm font-medium transition 
           ${
             pagination.page === 1
-              ? "pointer-events-none opacity-50 border-gray-200 text-gray-400"
-              : "border-green-200 text-green-700 hover:bg-green-50"
+              ? "pointer-events-none opacity-50 border-[var(--border)] text-[var(--secondary-foreground)]"
+              : "border-[var(--primary-light)] text-[var(--primary)] hover:bg-[var(--primary-light)]"
           }`}
             >
               ← Previous
             </Link>
 
             {/* Page Info */}
-            <div className="px-4 py-2 bg-green-50 text-green-700 text-sm font-semibold rounded-lg shadow-sm">
+            <div className="px-4 py-2 bg-[var(--primary-light)] text-[var(--primary)] text-sm font-semibold rounded-lg shadow-sm">
               Page {pagination.page} of {pagination.totalPages}
             </div>
 
@@ -247,8 +247,8 @@ export default function UserTable({
               className={`px-4 py-2 rounded-lg border text-sm font-medium transition 
           ${
             pagination.page === pagination.totalPages
-              ? "pointer-events-none opacity-50 border-gray-200 text-gray-400"
-              : "border-green-200 text-green-700 hover:bg-green-50"
+              ? "pointer-events-none opacity-50 border-[var(--border)] text-[var(--secondary-foreground)]"
+              : "border-[var(--primary-light)] text-[var(--primary)] hover:bg-[var(--primary-light)]"
           }`}
             >
               Next →
@@ -259,17 +259,17 @@ export default function UserTable({
 
       {showModal && (
         <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
-          <div className="bg-white rounded-xl shadow-lg p-6 w-[350px]">
-            <h2 className="text-lg font-semibold mb-2">Confirm Delete</h2>
+          <div className="bg-[var(--card-bg)] rounded-xl shadow-lg p-6 w-[350px] border border-[var(--border)]">
+            <h2 className="text-lg font-semibold mb-2 text-[var(--foreground)]">Confirm Delete</h2>
 
-            <p className="text-gray-600 mb-6">
+            <p className="text-[var(--secondary-foreground)] mb-6">
               Are you sure you want to delete{" "}
               <span className="font-medium">{selectedUser?.fullName}</span>?
             </p>
 
             <div className="flex justify-end gap-3">
               <button
-                className="px-4 py-2 border rounded-lg hover:bg-gray-100"
+                className="px-4 py-2 border border-[var(--border)] rounded-lg hover:bg-[var(--secondary)] text-[var(--foreground)]"
                 onClick={() => setShowModal(false)}
                 disabled={loading}
               >
@@ -277,7 +277,7 @@ export default function UserTable({
               </button>
 
               <button
-                className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 disabled:opacity-50"
+                className="px-4 py-2 bg-[var(--error)] text-white rounded-lg hover:bg-[var(--error)]/80 disabled:opacity-50"
                 onClick={confirmDelete}
                 disabled={loading}
               >

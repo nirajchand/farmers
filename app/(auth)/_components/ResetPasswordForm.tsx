@@ -60,18 +60,18 @@ export default function ResetPasswordForm({ token }: { token: string }) {
 
   if (!token) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-gray-50 px-4">
-        <div className="w-full max-w-md bg-white shadow-lg rounded-2xl p-8 border border-gray-200">
+      <div className="flex items-center justify-center min-h-screen bg-[var(--background)] px-4">
+        <div className="w-full max-w-md bg-[var(--card-bg)] shadow-lg rounded-2xl p-8 border border-[var(--border)]">
           <div className="text-center">
-            <h2 className="text-2xl font-bold text-red-600">
+            <h2 className="text-2xl font-bold text-[var(--error)]">
               Invalid Reset Link
             </h2>
-            <p className="text-sm text-gray-500 mt-2">
+            <p className="text-sm text-[var(--secondary-foreground)] mt-2">
               This password reset link is invalid or has expired.
             </p>
             <Link
               href="/request-password-reset"
-              className="inline-block mt-4 text-blue-600 font-medium hover:underline"
+              className="inline-block mt-4 text-[var(--info)] font-medium hover:underline"
             >
               Request a new reset link
             </Link>
@@ -82,12 +82,12 @@ export default function ResetPasswordForm({ token }: { token: string }) {
   }
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-50 px-4">
-      <div className="w-full max-w-md bg-white shadow-lg rounded-2xl p-8 border border-gray-200">
+    <div className="flex items-center justify-center min-h-screen bg-[var(--background)] px-4">
+      <div className="w-full max-w-md bg-[var(--card-bg)] shadow-lg rounded-2xl p-8 border border-[var(--border)]">
         {/* Header */}
         <div className="text-center mb-6">
-          <h2 className="text-2xl font-bold text-gray-800">Reset Password</h2>
-          <p className="text-sm text-gray-500 mt-2">
+          <h2 className="text-2xl font-bold text-[var(--foreground)]">Reset Password</h2>
+          <p className="text-sm text-[var(--secondary-foreground)] mt-2">
             Enter a new password to regain access to your account.
           </p>
         </div>
@@ -104,7 +104,7 @@ export default function ResetPasswordForm({ token }: { token: string }) {
           <div>
             <label
               htmlFor="password"
-              className="block text-sm font-medium text-gray-700 mb-1"
+              className="block text-sm font-medium text-[var(--foreground)] mb-1"
             >
               New Password
             </label>
@@ -114,12 +114,12 @@ export default function ResetPasswordForm({ token }: { token: string }) {
               placeholder="Enter new password"
               autoComplete="new-password"
               {...register("password")}
-              className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition ${
-                errors.password ? "border-red-500" : "border-gray-300"
+              className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--primary)] focus:border-transparent transition bg-[var(--input-bg)] text-[var(--foreground)] ${
+                errors.password ? "border-[var(--error)]" : "border-[var(--border)]"
               }`}
             />
             {errors.password && (
-              <p className="text-red-500 text-sm mt-1">
+              <p className="text-[var(--error)] text-sm mt-1">
                 {errors.password.message}
               </p>
             )}
@@ -129,7 +129,7 @@ export default function ResetPasswordForm({ token }: { token: string }) {
           <div>
             <label
               htmlFor="confirmPassword"
-              className="block text-sm font-medium text-gray-700 mb-1"
+              className="block text-sm font-medium text-[var(--foreground)] mb-1"
             >
               Confirm Password
             </label>
@@ -139,12 +139,12 @@ export default function ResetPasswordForm({ token }: { token: string }) {
               placeholder="Re-enter your password"
               autoComplete="new-password"
               {...register("confirmPassword")}
-              className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition ${
-                errors.confirmPassword ? "border-red-500" : "border-gray-300"
+              className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--primary)] focus:border-transparent transition bg-[var(--input-bg)] text-[var(--foreground)] ${
+                errors.confirmPassword ? "border-[var(--error)]" : "border-[var(--border)]"
               }`}
             />
             {errors.confirmPassword && (
-              <p className="text-red-500 text-sm mt-1">
+              <p className="text-[var(--error)] text-sm mt-1">
                 {errors.confirmPassword.message}
               </p>
             )}
@@ -156,24 +156,24 @@ export default function ResetPasswordForm({ token }: { token: string }) {
             disabled={isSubmitting}
             className={`w-full py-2.5 rounded-lg text-white font-medium transition-colors ${
               isSubmitting
-                ? "bg-blue-400 cursor-not-allowed"
-                : "bg-blue-600 hover:bg-blue-700"
+                ? "bg-[var(--info)] cursor-not-allowed opacity-75"
+                : "bg-[var(--info)] hover:bg-blue-700"
             }`}
           >
             {isSubmitting ? "Resetting..." : "Reset Password"}
           </button>
 
           {/* Links */}
-          <div className="flex flex-col sm:flex-row justify-between text-sm text-gray-500 mt-2 gap-2">
+          <div className="flex flex-col sm:flex-row justify-between text-sm text-[var(--secondary-foreground)] mt-2 gap-2">
             <Link
               href="/login"
-              className="text-blue-600 font-medium hover:underline text-center"
+              className="text-[var(--info)] font-medium hover:underline text-center"
             >
               Back to Login
             </Link>
             <Link
               href="/request-password-reset"
-              className="text-blue-600 font-medium hover:underline text-center"
+              className="text-[var(--info)] font-medium hover:underline text-center"
             >
               Request another reset email
             </Link>

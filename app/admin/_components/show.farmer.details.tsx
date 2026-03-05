@@ -26,22 +26,22 @@ export default function ShowFarmerDetails({ userId }: { userId: string }) {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 flex justify-center items-center p-4">
-      <div className="w-full max-w-4xl bg-white rounded-3xl shadow-lg p-10">
+    <div className="min-h-screen bg-[var(--background)] flex justify-center items-center p-4">
+      <div className="w-full max-w-4xl bg-[var(--card-bg)] rounded-3xl shadow-lg p-10 border border-[var(--border)]">
 
         {/* Profile Section */}
-        <div className="flex flex-col items-center text-center border-b pb-8">
+        <div className="flex flex-col items-center text-center border-b border-[var(--border)] pb-8">
           <img
             src={process.env.NEXT_PUBLIC_API_BASE_URL + user.profile_image}
             alt="Profile"
-            className="w-40 h-40 rounded-full object-cover border-4 border-green-100 shadow-sm"
+            className="w-40 h-40 rounded-full object-cover border-4 border-[var(--primary-light)] shadow-sm"
           />
 
-          <h1 className="text-3xl font-semibold text-gray-800 mt-4">
+          <h1 className="text-3xl font-semibold text-[var(--foreground)] mt-4">
             {user.fullName}
           </h1>
 
-          <p className="text-gray-500 mt-1">Farmer</p>
+          <p className="text-[var(--secondary-foreground)] mt-1">Farmer</p>
         </div>
 
         {/* Details Section */}
@@ -49,40 +49,40 @@ export default function ShowFarmerDetails({ userId }: { userId: string }) {
 
           {/* Full Name */}
           <div>
-            <p className="text-sm text-gray-400 uppercase">Full Name</p>
-            <p className="text-lg font-medium text-gray-800">
+            <p className="text-sm text-[var(--secondary-foreground)] uppercase">Full Name</p>
+            <p className="text-lg font-medium text-[var(--foreground)]">
               {user.fullName}
             </p>
           </div>
 
           {/* Email */}
           <div>
-            <p className="text-sm text-gray-400 uppercase">Email</p>
-            <p className="text-lg font-medium text-gray-800 break-all">
+            <p className="text-sm text-[var(--secondary-foreground)] uppercase">Email</p>
+            <p className="text-lg font-medium text-[var(--foreground)] break-all">
               {user.email}
             </p>
           </div>
 
           {/* Phone */}
           <div>
-            <p className="text-sm text-gray-400 uppercase">Phone Number</p>
-            <p className="text-lg font-medium text-gray-800">
+            <p className="text-sm text-[var(--secondary-foreground)] uppercase">Phone Number</p>
+            <p className="text-lg font-medium text-[var(--foreground)]">
               {user.phoneNumber || "Not Provided"}
             </p>
           </div>
 
           {/* Farm Name */}
           <div>
-            <p className="text-sm text-gray-400 uppercase">Farm Name</p>
-            <p className="text-lg font-medium text-gray-800">
+            <p className="text-sm text-[var(--secondary-foreground)] uppercase">Farm Name</p>
+            <p className="text-lg font-medium text-[var(--foreground)]">
               {user.farmName || "Not Provided"}
             </p>
           </div>
 
           {/* Farm Location */}
           <div>
-            <p className="text-sm text-gray-400 uppercase">Farm Location</p>
-            <p className="text-lg font-medium text-gray-800">
+            <p className="text-sm text-[var(--secondary-foreground)] uppercase">Farm Location</p>
+            <p className="text-lg font-medium text-[var(--foreground)]">
               {user.farmLocation || "Not Provided"}
             </p>
           </div>
@@ -90,8 +90,8 @@ export default function ShowFarmerDetails({ userId }: { userId: string }) {
 
         {/* Description Full Width */}
         <div className="mt-8">
-          <p className="text-sm text-gray-400 uppercase">Description</p>
-          <p className="text-lg font-medium text-gray-800 mt-1">
+          <p className="text-sm text-[var(--secondary-foreground)] uppercase">Description</p>
+          <p className="text-lg font-medium text-[var(--foreground)] mt-1">
             {user.description || "Not Provided"}
           </p>
         </div>

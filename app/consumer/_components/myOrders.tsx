@@ -66,7 +66,7 @@ export default function MyOrders() {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center h-screen text-green-600 text-xl font-semibold">
+      <div className="flex justify-center items-center h-screen text-[var(--primary)] text-xl font-semibold">
         Loading your orders...
       </div>
     );
@@ -74,16 +74,16 @@ export default function MyOrders() {
 
   if (orders.length === 0) {
     return (
-      <div className="flex justify-center items-center h-screen text-gray-500 text-lg">
+      <div className="flex justify-center items-center h-screen text-[var(--secondary-foreground)] text-lg">
         No orders found.
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-green-50 p-6">
+    <div className="min-h-screen bg-[var(--background)] p-6">
       <div className="mb-6">
-        <h1 className="text-3xl font-bold text-green-700 mb-4">My Orders</h1>
+        <h1 className="text-3xl font-bold text-[var(--primary)] mb-4">My Orders</h1>
 
         {/* Filter Buttons */}
         <div className="flex gap-3">
@@ -91,8 +91,8 @@ export default function MyOrders() {
             onClick={() => setFilter("all")}
             className={`px-4 py-2 rounded-lg font-semibold transition-all ${
               filter === "all"
-                ? "bg-green-600 text-white shadow-md"
-                : "bg-white text-green-600 border border-green-200 hover:border-green-400"
+                ? "bg-[var(--primary)] text-white shadow-md"
+                : "bg-[var(--card-bg)] text-[var(--primary)] border border-[var(--border)] hover:border-[var(--primary)]"
             }`}
           >
             All
@@ -101,8 +101,8 @@ export default function MyOrders() {
             onClick={() => setFilter("daily")}
             className={`px-4 py-2 rounded-lg font-semibold transition-all ${
               filter === "daily"
-                ? "bg-green-600 text-white shadow-md"
-                : "bg-white text-green-600 border border-green-200 hover:border-green-400"
+                ? "bg-[var(--primary)] text-white shadow-md"
+                : "bg-[var(--card-bg)] text-[var(--primary)] border border-[var(--border)] hover:border-[var(--primary)]"
             }`}
           >
             Today
@@ -111,8 +111,8 @@ export default function MyOrders() {
             onClick={() => setFilter("monthly")}
             className={`px-4 py-2 rounded-lg font-semibold transition-all ${
               filter === "monthly"
-                ? "bg-green-600 text-white shadow-md"
-                : "bg-white text-green-600 border border-green-200 hover:border-green-400"
+                ? "bg-[var(--primary)] text-white shadow-md"
+                : "bg-[var(--card-bg)] text-[var(--primary)] border border-[var(--border)] hover:border-[var(--primary)]"
             }`}
           >
             This Month
@@ -121,7 +121,7 @@ export default function MyOrders() {
       </div>
 
       {filteredOrders.length === 0 ? (
-        <div className="text-center text-gray-500 text-lg py-10">
+        <div className="text-center text-[var(--secondary-foreground)] text-lg py-10">
           No orders found for the selected filter.
         </div>
       ) : (
@@ -129,13 +129,13 @@ export default function MyOrders() {
           {filteredOrders.map((order) => (
             <div
               key={order._id}
-              className="bg-white rounded-2xl shadow-md p-6 border border-green-100"
+              className="bg-[var(--card-bg)] rounded-2xl shadow-md p-6 border border-[var(--border)]"
             >
               {/* Header */}
               <div className="flex justify-between items-center mb-4">
                 <div>
-                  <p className="text-sm text-gray-500">Order ID: {order._id}</p>
-                  <p className="text-sm text-gray-500">
+                  <p className="text-sm text-[var(--secondary-foreground)]">Order ID: {order._id}</p>
+                  <p className="text-sm text-[var(--secondary-foreground)]">
                     {new Date(order.createdAt).toLocaleString()}
                   </p>
                 </div>
@@ -144,10 +144,10 @@ export default function MyOrders() {
                   className={`px-4 py-1 rounded-full text-sm font-semibold
                   ${
                     order.orderStatus === "DELIVERED"
-                      ? "bg-green-100 text-green-700"
+                      ? "bg-[var(--success-light)] text-[var(--success)]"
                       : order.orderStatus === "CANCELLED"
-                        ? "bg-red-100 text-red-600"
-                        : "bg-yellow-100 text-yellow-700"
+                        ? "bg-[var(--error-light)] text-[var(--error)]"
+                        : "bg-[var(--warning-light)] text-[var(--warning)]"
                   }`}
                 >
                   {order.orderStatus}
@@ -159,18 +159,18 @@ export default function MyOrders() {
                 {order.items.map((item, index) => (
                   <div
                     key={index}
-                    className="flex justify-between border-b pb-2"
+                    className="flex justify-between border-b border-[var(--border)] pb-2"
                   >
                     <div>
-                      <p className="font-medium text-gray-700">
+                      <p className="font-medium text-[var(--foreground)]">
                         {item.productName}
                       </p>
-                      <p className="text-sm text-gray-500">
+                      <p className="text-sm text-[var(--secondary-foreground)]">
                         Qty: {item.quantity}
                       </p>
                     </div>
 
-                    <p className="text-green-600 font-semibold">
+                    <p className="text-[var(--primary)] font-semibold">
                       Rs. {item.price * item.quantity}
                     </p>
                   </div>
@@ -180,7 +180,7 @@ export default function MyOrders() {
               {/* Footer */}
               <div className="flex justify-between items-center pt-4">
                 <div>
-                  <p className="text-sm text-gray-500">
+                  <p className="text-sm text-[var(--secondary-foreground)]">
                     Payment: {order.paymentMethod}
                   </p>
                   <p className="text-sm font-semibold">
@@ -188,8 +188,8 @@ export default function MyOrders() {
                     <span
                       className={
                         order.paymentStatus === "PAID"
-                          ? "text-green-600"
-                          : "text-red-500"
+                          ? "text-[var(--primary)]"
+                          : "text-[var(--error)]"
                       }
                     >
                       {order.paymentStatus}
@@ -197,7 +197,7 @@ export default function MyOrders() {
                   </p>
                 </div>
 
-                <p className="text-xl font-bold text-green-700">
+                <p className="text-xl font-bold text-[var(--primary)]">
                   Total: Rs. {order.totalAmount}
                 </p>
               </div>

@@ -58,13 +58,13 @@ export default function AddProduct() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-emerald-50 flex justify-center items-center p-6">
-      <div className="w-full max-w-3xl bg-white shadow-2xl rounded-2xl p-8 border-t-4 border-green-600">
+    <div className="min-h-screen bg-[var(--background)] flex justify-center items-center p-6">
+      <div className="w-full max-w-3xl bg-[var(--card-bg)] shadow-2xl rounded-2xl p-8 border-t-4 border-[var(--primary)]">
         <div className="mb-6">
-          <h2 className="text-3xl font-bold text-green-700 mb-2">
+          <h2 className="text-3xl font-bold text-[var(--primary)] mb-2">
             Add New Product
           </h2>
-          <p className="text-gray-600">Fill in the details to list your product</p>
+          <p className="text-[var(--secondary-foreground)]">Fill in the details to list your product</p>
         </div>
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
@@ -176,14 +176,14 @@ export default function AddProduct() {
 
             {/* Selected File Name + Cancel */}
             {fileName && (
-              <div className="flex justify-between items-center mt-3 bg-green-50 border border-green-200 rounded-xl px-4 py-2">
-                <span className="text-sm font-medium text-green-700">{fileName}</span>
+              <div className="flex justify-between items-center mt-3 bg-[var(--primary-light)] border border-[var(--primary)] rounded-xl px-4 py-2">
+                <span className="text-sm font-medium text-[var(--primary)]">{fileName}</span>
                 <button
                   type="button"
                   onClick={() => {
                     setFileName("");
                   }}
-                  className="text-red-500 font-bold text-lg hover:text-red-700 hover:cursor-pointer"
+                  className="text-[var(--error)] font-bold text-lg hover:text-[var(--error)]/80 hover:cursor-pointer"
                 >
                   ✕
                 </button>
@@ -196,7 +196,7 @@ export default function AddProduct() {
           {/* Submit */}
           <button
             type="submit"
-            className="w-full bg-gradient-to-r from-green-600 to-emerald-600 text-white py-3 rounded-xl font-semibold hover:from-green-700 hover:to-emerald-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+            className="w-full bg-gradient-to-r from-[var(--primary)] to-emerald-600 text-white py-3 rounded-xl font-semibold hover:from-[var(--primary-dark)] hover:to-emerald-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
           >
             Save Product
           </button>
@@ -208,27 +208,28 @@ export default function AddProduct() {
           display: block;
           font-weight: 600;
           margin-bottom: 8px;
-          color: #047857;
+          color: var(--primary);
         }
         .input {
           width: 100%;
-          border: 2px solid #d1fae5;
+          border: 2px solid var(--border);
           border-radius: 12px;
           padding: 12px 16px;
           outline: none;
           transition: all 0.3s ease;
-          background-color: #f9fafb;
+          background-color: var(--input-bg);
+          color: var(--foreground);
         }
         .input:focus {
-          border-color: #10b981;
-          background-color: white;
-          box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+          border-color: var(--primary);
+          background-color: var(--card-bg);
+          box-shadow: 0 0 0 3px rgba(21, 163, 5, 0.1);
         }
         .input:hover {
-          border-color: #6ee7b7;
+          border-color: var(--primary-light);
         }
         .error {
-          color: #dc2626;
+          color: var(--error);
           font-size: 13px;
           margin-top: 4px;
         }

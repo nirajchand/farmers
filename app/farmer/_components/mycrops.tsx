@@ -73,33 +73,33 @@ export default function MyCrops() {
       label: "Total Products",
       value: stats.total,
       icon: Package,
-      bgColor: "bg-blue-50",
-      iconColor: "text-blue-600",
-      borderColor: "border-blue-200",
+      bgColor: "bg-[var(--primary-light)]",
+      iconColor: "text-[var(--primary)]",
+      borderColor: "border-[var(--primary)]",
     },
     {
       label: "Ready to Sell",
       value: stats.ready,
       icon: CheckCircle,
-      bgColor: "bg-green-50",
-      iconColor: "text-green-600",
-      borderColor: "border-green-200",
+      bgColor: "bg-[var(--success-light)]",
+      iconColor: "text-[var(--success)]",
+      borderColor: "border-[var(--success)]",
     },
     {
       label: "Growing",
       value: stats.growing,
       icon: Leaf,
-      bgColor: "bg-yellow-50",
-      iconColor: "text-yellow-600",
-      borderColor: "border-yellow-200",
+      bgColor: "bg-[var(--warning-light)]",
+      iconColor: "text-[var(--warning)]",
+      borderColor: "border-[var(--warning)]",
     },
     {
       label: "Sold",
       value: stats.sold,
       icon: TrendingUp,
-      bgColor: "bg-purple-50",
-      iconColor: "text-purple-600",
-      borderColor: "border-purple-200",
+      bgColor: "bg-[var(--info-light)]",
+      iconColor: "text-[var(--info)]",
+      borderColor: "border-[var(--info)]",
     },
   ];
 
@@ -107,9 +107,9 @@ export default function MyCrops() {
     <div className="p-6">
       {/* Header */}
       <div className="flex justify-between items-center mb-8">
-        <h2 className="text-3xl font-bold text-green-600">My Crops</h2>
+        <h2 className="text-3xl font-bold text-[var(--primary)]">My Crops</h2>
         <button
-          className="flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-xl hover:bg-green-700 hover:cursor-pointer transition shadow-md hover:shadow-lg"
+          className="flex items-center gap-2 px-4 py-2 bg-[var(--primary)] text-white rounded-xl hover:bg-[var(--primary-dark)] hover:cursor-pointer transition shadow-md hover:shadow-lg"
           onClick={() => {
             router.push("/farmer/addProduct");
           }}
@@ -129,10 +129,10 @@ export default function MyCrops() {
             >
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-gray-600 text-sm font-medium mb-1">
+                  <p className="text-[var(--secondary-foreground)] text-sm font-medium mb-1">
                     {stat.label}
                   </p>
-                  <p className="text-3xl font-bold text-gray-800">
+                  <p className="text-3xl font-bold text-[var(--foreground)]">
                     {stat.value}
                   </p>
                 </div>
@@ -146,26 +146,26 @@ export default function MyCrops() {
       </div>
 
       {/* Crops Table */}
-      <div className="overflow-x-auto rounded-xl shadow-sm border border-green-100">
-        <table className="min-w-full bg-white">
-          <thead className="bg-green-50 border-b border-green-200">
+      <div className="overflow-x-auto rounded-xl shadow-sm border border-[var(--border)]">
+        <table className="min-w-full bg-[var(--card-bg)]">
+          <thead className="bg-[var(--secondary)] border-b border-[var(--border)]">
             <tr>
-              <th className="p-4 text-left text-green-700 font-semibold uppercase tracking-wider text-sm">
+              <th className="p-4 text-left text-[var(--primary)] font-semibold uppercase tracking-wider text-sm">
                 Crop
               </th>
-              <th className="p-4 text-left text-green-700 font-semibold uppercase tracking-wider text-sm">
+              <th className="p-4 text-left text-[var(--primary)] font-semibold uppercase tracking-wider text-sm">
                 Quantity
               </th>
-              <th className="p-4 text-left text-green-700 font-semibold uppercase tracking-wider text-sm">
+              <th className="p-4 text-left text-[var(--primary)] font-semibold uppercase tracking-wider text-sm">
                 Status
               </th>
-              <th className="p-4 text-left text-green-700 font-semibold uppercase tracking-wider text-sm">
+              <th className="p-4 text-left text-[var(--primary)] font-semibold uppercase tracking-wider text-sm">
                 Price
               </th>
-              <th className="p-4 text-left text-green-700 font-semibold uppercase tracking-wider text-sm">
+              <th className="p-4 text-left text-[var(--primary)] font-semibold uppercase tracking-wider text-sm">
                 Last Updated
               </th>
-              <th className="p-4 text-left text-green-700 font-semibold uppercase tracking-wider text-sm">
+              <th className="p-4 text-left text-[var(--primary)] font-semibold uppercase tracking-wider text-sm">
                 Actions
               </th>
             </tr>
@@ -175,69 +175,69 @@ export default function MyCrops() {
               products.map((crop, index) => (
                 <tr
                   key={crop._id}
-                  className={`border-b border-green-100 ${
-                    index % 2 === 0 ? "bg-white" : "bg-green-50/50"
-                  } hover:bg-green-100/50 transition-colors hover:cursor-pointer`}
+                  className={`border-b border-[var(--border)] ${
+                    index % 2 === 0 ? "bg-[var(--card-bg)]" : "bg-[var(--secondary)]"
+                  } hover:bg-[var(--secondary)] transition-colors hover:cursor-pointer`}
                   onClick={() => {
                     router.push(`/farmer/${crop._id}`);
                   }}
                 >
-                  <td className="p-4 font-semibold text-green-800">
+                  <td className="p-4 font-semibold text-[var(--foreground)]">
                     {crop.productName}
                   </td>
-                  <td className="p-4 text-gray-700">{`${crop.quantity} ${crop.unitType}`}</td>
+                  <td className="p-4 text-[var(--secondary-foreground)]">{`${crop.quantity} ${crop.unitType}`}</td>
                   <td className="p-4">
                     <span
                       className={`px-3 py-1 rounded-full text-sm font-medium ${
                         crop.status === "Growing"
-                          ? "bg-yellow-100 text-yellow-700"
+                          ? "bg-[var(--warning-light)] text-[var(--warning)]"
                           : crop.status === "Ready"
-                            ? "bg-green-100 text-green-700"
+                            ? "bg-[var(--success-light)] text-[var(--success)]"
                             : crop.status === "Sold"
-                              ? "bg-purple-100 text-purple-700"
-                              : "bg-gray-100 text-gray-500"
+                              ? "bg-[var(--info-light)] text-[var(--info)]"
+                              : "bg-[var(--secondary)] text-[var(--secondary-foreground)]"
                       }`}
                     >
                       {crop.status}
                     </span>
                   </td>
-                  <td className="p-4 font-medium text-green-800">
+                  <td className="p-4 font-medium text-[var(--primary)]">
                     Rs. {`${crop.price.toFixed(2)}/ ${crop.unitType}`}
                   </td>
-                  <td className="p-4 text-gray-600">
+                  <td className="p-4 text-[var(--secondary-foreground)]">
                     {crop.updatedAt
                       ? new Date(crop.updatedAt).toISOString().split("T")[0]
                       : "N/A"}
                   </td>
                   <td className="p-4 flex gap-2">
                     <button
-                      className="p-2 rounded-lg bg-green-50 hover:bg-green-100 transition hover:cursor-pointer"
+                      className="p-2 rounded-lg bg-[var(--primary-light)] hover:bg-[var(--primary-light)]/80 transition hover:cursor-pointer"
                       onClick={(e) => {
                         e.stopPropagation();
                         router.push(`/farmer/${crop._id}/edit`);
                       }}
                     >
-                      <Edit className="w-4 h-4 text-green-600" />
+                      <Edit className="w-4 h-4 text-[var(--primary)]" />
                     </button>
                     <button
-                      className="p-2 rounded-lg bg-red-50 hover:bg-red-100 transition"
+                      className="p-2 rounded-lg bg-[var(--error-light)] hover:bg-[var(--error-light)]/80 transition"
                       onClick={(e) => {
                         e.stopPropagation();
                         handleDelete(crop);
                       }}
                     >
-                      <Trash className="w-4 h-4 text-red-600" />
+                      <Trash className="w-4 h-4 text-[var(--error)]" />
                     </button>
                   </td>
                 </tr>
               ))
             ) : (
               <tr>
-                <td colSpan={6} className="p-8 text-center text-gray-500">
+                <td colSpan={6} className="p-8 text-center text-[var(--secondary-foreground)]">
                   <div className="flex flex-col items-center justify-center">
-                    <Package className="w-12 h-12 text-gray-300 mb-2" />
+                    <Package className="w-12 h-12 text-[var(--secondary-foreground)] mb-2" />
                     <p className="text-lg font-medium">No crops found</p>
-                    <p className="text-sm text-gray-400">
+                    <p className="text-sm text-[var(--secondary-foreground)]">
                       Start by adding your first crop
                     </p>
                   </div>
@@ -250,10 +250,10 @@ export default function MyCrops() {
 
       {showModal && (
         <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
-          <div className="bg-white rounded-xl shadow-lg p-6 w-[350px]">
-            <h2 className="text-lg font-semibold mb-2">Confirm Delete</h2>
+          <div className="bg-[var(--card-bg)] rounded-xl shadow-lg p-6 w-[350px] border border-[var(--border)]">
+            <h2 className="text-lg font-semibold mb-2 text-[var(--foreground)]">Confirm Delete</h2>
 
-            <p className="text-gray-600 mb-6">
+            <p className="text-[var(--secondary-foreground)] mb-6">
               Are you sure you want to delete{" "}
               <span className="font-medium">
                 {selectedProduct?.productName}
@@ -263,7 +263,7 @@ export default function MyCrops() {
 
             <div className="flex justify-end gap-3">
               <button
-                className="px-4 py-2 border rounded-lg hover:bg-gray-100"
+                className="px-4 py-2 border border-[var(--border)] rounded-lg hover:bg-[var(--secondary)] text-[var(--foreground)]"
                 onClick={() => setShowModal(false)}
                 disabled={loading}
               >
@@ -271,7 +271,7 @@ export default function MyCrops() {
               </button>
 
               <button
-                className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 disabled:opacity-50"
+                className="px-4 py-2 bg-[var(--error)] text-white rounded-lg hover:bg-[var(--error)]/80 disabled:opacity-50"
                 onClick={handleConfirmDelete}
                 disabled={loading}
               >

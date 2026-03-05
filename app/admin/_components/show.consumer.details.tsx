@@ -25,59 +25,59 @@ export default function ShowConsumerDetails({ userId }: { userId: string }) {
     return <p className="text-center mt-10">Loading profile...</p>;
   }
   return (
-    <div className="min-h-screen bg-gray-50 flex justify-center items-center p-1">
-      <div className="w-full max-w-3xl bg-white rounded-3xl shadow-lg p-10">
+    <div className="min-h-screen bg-[var(--background)] flex justify-center items-center p-1">
+      <div className="w-full max-w-3xl bg-[var(--card-bg)] rounded-3xl shadow-lg p-10 border border-[var(--border)]">
         {/* Profile Image + Name */}
-        <div className="flex flex-col items-center text-center border-b pb-8">
+        <div className="flex flex-col items-center text-center border-b border-[var(--border)] pb-8">
           <img
             src={process.env.NEXT_PUBLIC_API_BASE_URL + user.profile_image}
             alt="Profile"
-            className="w-45 h-45 rounded-full object-cover border-4 border-green-100 shadow-sm"
+            className="w-45 h-45 rounded-full object-cover border-4 border-[var(--primary-light)] shadow-sm"
           />
 
-          <h1 className="text-3xl font-semibold text-gray-800 mt-4">
+          <h1 className="text-3xl font-semibold text-[var(--foreground)] mt-4">
             {user.fullName}
           </h1>
 
-          <p className="text-gray-500 mt-1">Consumer</p>
+          <p className="text-[var(--secondary-foreground)] mt-1">Consumer</p>
         </div>
 
         {/* Details Section */}
         <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-8">
           {/* Full Name */}
           <div className="space-y-1">
-            <p className="text-sm text-gray-400 uppercase tracking-wide">
+            <p className="text-sm text-[var(--secondary-foreground)] uppercase tracking-wide">
               Full Name
             </p>
-            <p className="text-lg font-medium text-gray-800">{user.fullName}</p>
+            <p className="text-lg font-medium text-[var(--foreground)]">{user.fullName}</p>
           </div>
 
           {/* Email */}
           <div className="space-y-1">
-            <p className="text-sm text-gray-400 uppercase tracking-wide">
+            <p className="text-sm text-[var(--secondary-foreground)] uppercase tracking-wide">
               Email Address
             </p>
-            <p className="text-lg font-medium text-gray-800 break-all">
+            <p className="text-lg font-medium text-[var(--foreground)] break-all">
               {user.email}
             </p>
           </div>
 
           {/* Phone Number */}
           <div className="space-y-1">
-            <p className="text-sm text-gray-400 uppercase tracking-wide">
+            <p className="text-sm text-[var(--secondary-foreground)] uppercase tracking-wide">
               Phone Number
             </p>
-            <p className="text-lg font-medium text-gray-800">
+            <p className="text-lg font-medium text-[var(--foreground)]">
               {user.phoneNumber || "Not Provided"}
             </p>
           </div>
 
           {/* Location */}
           <div className="space-y-1">
-            <p className="text-sm text-gray-400 uppercase tracking-wide">
+            <p className="text-sm text-[var(--secondary-foreground)] uppercase tracking-wide">
               Location
             </p>
-            <p className="text-lg font-medium text-gray-800">
+            <p className="text-lg font-medium text-[var(--foreground)]">
               {user.userLocation || "Not Provided"}
             </p>
           </div>

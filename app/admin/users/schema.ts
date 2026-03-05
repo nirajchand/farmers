@@ -1,6 +1,11 @@
 import z, { email } from "zod";
 
-const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png"];
+const ACCEPTED_IMAGE_TYPES = [
+  "image/jpeg",
+  "image/jpg",
+  "image/png",
+  "image/webp",
+];
 
 export const userSchema = z.object({
   fullName: z.string(),

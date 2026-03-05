@@ -4,9 +4,9 @@ import { useRouter } from "next/navigation";
 export default function AboutPage() {
     const router = useRouter();
   return (
-    <div className="bg-[#F9FBE7] min-h-screen">
+    <div className="bg-[var(--background)] min-h-screen">
       {/* Hero Section */}
-      <section className="bg-green-700 text-white py-20 px-6 text-center">
+      <section className="bg-[var(--primary)] text-white py-20 px-6 text-center">
         <h1 className="text-4xl md:text-5xl font-bold mb-6">
           Connecting Farmers Directly to Your Table
         </h1>
@@ -17,11 +17,11 @@ export default function AboutPage() {
 
       {/* Mission Section */}
       <section className="py-16 px-6 max-w-6xl mx-auto">
-        <div className="bg-white rounded-2xl shadow-md p-10 text-center">
-          <h2 className="text-3xl font-bold text-green-700 mb-6">
+        <div className="bg-[var(--card-bg)] rounded-2xl shadow-md p-10 text-center border border-[var(--border)]">
+          <h2 className="text-3xl font-bold text-[var(--primary)] mb-6">
             Our Mission
           </h2>
-          <p className="text-gray-600 text-lg leading-relaxed">
+          <p className="text-[var(--secondary-foreground)] text-lg leading-relaxed">
             We empower local farmers by giving them direct access to customers,
             ensuring better profits while delivering fresh and healthy food
             to communities.
@@ -30,9 +30,9 @@ export default function AboutPage() {
       </section>
 
       {/* Features Section */}
-      <section className="py-16 px-6 bg-green-50">
+      <section className="py-16 px-6 bg-[var(--secondary)]">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold text-center text-green-700 mb-12">
+          <h2 className="text-3xl font-bold text-center text-[var(--primary)] mb-12">
             Why Choose Us?
           </h2>
 
@@ -47,9 +47,9 @@ export default function AboutPage() {
             ].map((feature, index) => (
               <div
                 key={index}
-                className="bg-white rounded-2xl shadow-md p-6 text-center hover:shadow-lg transition"
+                className="bg-[var(--card-bg)] rounded-2xl shadow-md p-6 text-center hover:shadow-lg transition border border-[var(--border)]"
               >
-                <p className="font-semibold text-gray-700">{feature}</p>
+                <p className="font-semibold text-[var(--foreground)]">{feature}</p>
               </div>
             ))}
           </div>
@@ -58,7 +58,7 @@ export default function AboutPage() {
 
       {/* How It Works */}
       <section className="py-20 px-6 max-w-6xl mx-auto text-center">
-        <h2 className="text-3xl font-bold text-green-700 mb-12">
+        <h2 className="text-3xl font-bold text-[var(--primary)] mb-12">
           How It Works
         </h2>
 
@@ -69,22 +69,22 @@ export default function AboutPage() {
             "Farmers prepare & dispatch",
             "Fresh delivery to your home"
           ].map((step, index) => (
-            <div key={index} className="bg-green-100 p-6 rounded-2xl">
-              <div className="text-2xl font-bold text-green-700 mb-4">
+            <div key={index} className="bg-[var(--primary-light)] p-6 rounded-2xl border border-[var(--primary)]">
+              <div className="text-2xl font-bold text-[var(--primary)] mb-4">
                 {index + 1}
               </div>
-              <p className="text-gray-700">{step}</p>
+              <p className="text-[var(--foreground)]">{step}</p>
             </div>
           ))}
         </div>
       </section>
 
       {/* CTA */}
-      <section className="bg-green-700 text-white py-16 text-center">
+      <section className="bg-[var(--primary)] text-white py-16 text-center">
         <h2 className="text-3xl font-bold mb-6">
           Start Your Farm-Fresh Journey Today
         </h2>
-        <button className="bg-white text-green-700 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition"
+        <button className="bg-white text-[var(--primary)] px-8 py-3 rounded-full font-semibold hover:bg-gray-200 transition"
         onClick={()=>{
             router.push("/login")
         }}>

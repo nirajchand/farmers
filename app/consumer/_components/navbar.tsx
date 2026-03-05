@@ -6,6 +6,7 @@ import { ShoppingCart, User, Search } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 import { useCart } from "@/context/CartContext";
 import { useRouter } from "next/navigation";
+import { ThemeToggle } from "@/app/_components/ThemeToggle";
 
 export default function Navbar() {
   const { logout } = useAuth();
@@ -24,7 +25,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="bg-white/95 backdrop-blur-md shadow-lg sticky top-0 z-50 border-b border-green-100/50">
+    <nav className="bg-[var(--card-bg)]/95 backdrop-blur-md shadow-lg sticky top-0 z-50 border-b border-[var(--border)]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-25 gap-6">
           {/* Logo */}
@@ -34,25 +35,25 @@ export default function Navbar() {
               alt="Farmers Logo"
               className="w-12 h-14 object-contain"
             />
-            <span className="text-2xl font-bold bg-gradient-to-r from-green-600 via-green-500 to-green-600 bg-clip-text text-transparent">
+            <span className="text-2xl font-bold bg-gradient-to-r from-[var(--primary)] via-green-500 to-[var(--primary)] bg-clip-text text-transparent">
               Farmers
             </span>
           </Link>
 
           {/* Search Bar */}
           <div className="hidden md:flex flex-1 justify-center">
-            <div className="flex items-center bg-green-50 rounded-xl px-4 py-2 w-full max-w-2xl hover:bg-green-100 focus-within:ring-2 focus-within:ring-green-500 transition-all duration-200">
+            <div className="flex items-center bg-[var(--secondary)] rounded-xl px-4 py-2 w-full max-w-2xl hover:bg-[var(--secondary)] focus-within:ring-2 focus-within:ring-[var(--primary)] transition-all duration-200">
               <form
                 onSubmit={handleSearch}
-                className="flex items-center bg-green-50 rounded-xl px-4 py-2 w-full max-w-2xl "
+                className="flex items-center bg-[var(--secondary)] rounded-xl px-4 py-2 w-full max-w-2xl "
               >
-                <Search className="w-5 h-5 text-green-600 mr-2" />
+                <Search className="w-5 h-5 text-[var(--primary)] mr-2" />
                 <input
                   type="text"
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
                   placeholder="Search fresh vegetables, fruits..."
-                  className="bg-transparent outline-none text-gray-700 placeholder-gray-500 w-full"
+                  className="bg-transparent outline-none text-[var(--foreground)] placeholder-[var(--secondary-foreground)] w-full"
                 />
               </form>
             </div>
@@ -60,11 +61,14 @@ export default function Navbar() {
 
           {/* Right Actions */}
           <div className="flex items-center gap-3 shrink-0">
+            {/* Theme Toggle */}
+            <ThemeToggle />
+
             {/* Cart */}
             <Link href="/consumer/cart" className="relative p-2.5 rounded-xl">
-              <ShoppingCart className="w-6 h-6" />
+              <ShoppingCart className="w-6 h-6 text-[var(--foreground)]" />
               {cartCount > 0 && (
-                <span className="absolute -top-1 -right-1 w-5 h-5 flex items-center justify-center rounded-full text-xs font-bold bg-green-600 text-white">
+                <span className="absolute -top-1 -right-1 w-5 h-5 flex items-center justify-center rounded-full text-xs font-bold bg-[var(--primary)] text-white">
                   {cartCount}
                 </span>
               )}
@@ -72,35 +76,35 @@ export default function Navbar() {
 
             {/* Profile Dropdown */}
             <div className="hidden md:block relative group">
-              <button className="flex items-center gap-2 px-4 py-2.5 rounded-xl hover:bg-green-50 transition-all duration-200">
-                <div className="w-8 h-8 bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center">
+              <button className="flex items-center gap-2 px-4 py-2.5 rounded-xl hover:bg-[var(--secondary)] transition-all duration-200">
+                <div className="w-8 h-8 bg-gradient-to-br from-[var(--primary-light)] to-[var(--primary)] rounded-full flex items-center justify-center">
                   <User className="w-5 h-5 text-white" />
                 </div>
-                <span className="text-gray-700 font-medium group-hover:text-green-600 transition-colors">
+                <span className="text-[var(--foreground)] font-medium group-hover:text-[var(--primary)] transition-colors">
                   Account
                 </span>
               </button>
 
-              <div className="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-xl border border-green-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+              <div className="absolute right-0 mt-1 w-48 bg-[var(--card-bg)] rounded-xl shadow-xl border border-[var(--border)] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
                 <Link
                   href="/consumer/profile"
-                  className="block px-4 py-3 text-gray-700 hover:bg-green-50 hover:text-green-600 rounded-t-xl"
+                  className="block px-4 py-3 text-[var(--foreground)] hover:bg-[var(--secondary)] hover:text-[var(--primary)] rounded-t-xl"
                 >
                   My Profile
                 </Link>
 
                 <Link
                   href="/consumer/orders"
-                  className="block px-4 py-3 text-gray-700 hover:bg-green-50 hover:text-green-600"
+                  className="block px-4 py-3 text-[var(--foreground)] hover:bg-[var(--secondary)] hover:text-[var(--primary)]"
                 >
                   My Orders
                 </Link>
 
-                <div className="border-t border-green-100"></div>
+                <div className="border-t border-[var(--border)]"></div>
 
                 <button
                   onClick={handleLogout}
-                  className="block w-full text-left px-4 py-3 text-red-600 hover:bg-red-50 rounded-b-xl"
+                  className="block w-full text-left px-4 py-3 text-[var(--error)] hover:bg-[var(--secondary)] rounded-b-xl"
                 >
                   Sign Out
                 </button>

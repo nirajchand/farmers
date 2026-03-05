@@ -12,19 +12,19 @@ export default function DashboardPage({
 }) {
   const router = useRouter()
   return (
-    <div className="p-20">
+    <div className="p-20 bg-[var(--background)]">
       {/* Heading */}
-      <h1 className="text-3xl font-bold mb-6 text-green-600">Vegetables</h1>
+      <h1 className="text-3xl font-bold mb-6 text-[var(--primary)]">Vegetables</h1>
 
       {/* Product Grid */}
       <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
         {products.length === 0 ? (
-          <p>No products found</p>
+          <p className="text-[var(--foreground)]">No products found</p>
         ) : (
           products.map((product) => (
             <div
               key={product._id}
-              className="bg-white rounded-2xl shadow-md hover:shadow-xl transition p-4"
+              className="bg-[var(--card-bg)] rounded-2xl border border-[var(--border)] shadow-md hover:shadow-xl transition p-4"
             >
               {/* Image */}
               <div className="w-full h-40 mb-4 overflow-hidden rounded-xl">
@@ -38,23 +38,23 @@ export default function DashboardPage({
               </div>
 
               {/* Details */}
-              <h2 className="text-lg font-semibold">{product.productName}</h2>
-              <p className="text-gray-600">Rs. {`${product.price} / ${product.unitType}`}</p>
+              <h2 className="text-lg font-semibold text-[var(--foreground)]">{product.productName}</h2>
+              <p className="text-[var(--secondary-foreground)]">Rs. {`${product.price} / ${product.unitType}`}</p>
 
               {/* Status Badge */}
               <span
                 className={`inline-block mt-2 px-3 py-1 text-sm rounded-full ${
                   product.status === "Growing"
-                    ? "bg-blue-100 text-blue-700"
+                    ? "bg-[var(--info-light)] text-[var(--info)]"
                     : product.status === "Ready"
-                      ? "bg-green-100 text-green-700"
-                      : "bg-red-100 text-red-700"
+                      ? "bg-[var(--success-light)] text-[var(--success)]"
+                      : "bg-[var(--error-light)] text-[var(--error)]"
                 }`}
               >
                 {product.status}
               </span>
 
-              <button className="mt-4 w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition"
+              <button className="mt-4 w-full bg-[var(--primary)] text-white py-2 rounded-lg hover:bg-[var(--primary-dark)] transition"
               onClick={()=>{
                 router.push(`/consumer/${product._id}`)
               }}>
@@ -74,15 +74,15 @@ export default function DashboardPage({
               className={`px-4 py-2 rounded-lg border text-sm font-medium transition 
           ${
             pagination.page === 1
-              ? "pointer-events-none opacity-50 border-gray-200 text-gray-400"
-              : "border-green-200 text-green-700 hover:bg-green-50"
+              ? "pointer-events-none opacity-50 border-[var(--border)] text-[var(--secondary-foreground)]"
+              : "border-[var(--primary)] text-[var(--primary)] hover:bg-[var(--primary-light)]"
           }`}
             >
               ← Previous
             </Link>
 
             {/* Page Info */}
-            <div className="px-4 py-2 bg-green-50 text-green-700 text-sm font-semibold rounded-lg shadow-sm">
+            <div className="px-4 py-2 bg-[var(--primary-light)] text-[var(--primary)] text-sm font-semibold rounded-lg shadow-sm">
               Page {pagination.page} of {pagination.totalPages}
             </div>
 
@@ -92,8 +92,8 @@ export default function DashboardPage({
               className={`px-4 py-2 rounded-lg border text-sm font-medium transition 
           ${
             pagination.page === pagination.totalPages
-              ? "pointer-events-none opacity-50 border-gray-200 text-gray-400"
-              : "border-green-200 text-green-700 hover:bg-green-50"
+              ? "pointer-events-none opacity-50 border-[var(--border)] text-[var(--secondary-foreground)]"
+              : "border-[var(--primary)] text-[var(--primary)] hover:bg-[var(--primary-light)]"
           }`}
             >
               Next →

@@ -1,5 +1,6 @@
 import { handleGetAllUser } from "@/lib/actions/admin/user_action";
 import UserTable from "../_components/user.table";
+import { redirect } from "next/navigation";
 
 
 export default async function Page({
@@ -14,6 +15,17 @@ export default async function Page({
   const response = await handleGetAllUser(page, size);
 
   if (!response.success) {
+    const message = (response.message || "").toLowerCase();
+    const isUnauthorizedError =
+      message.includes("unauthor") ||
+      message.includes("unathur") ||
+      message.includes("jwt") ||
+      message.includes("token");
+
+    if (isUnauthorizedError) {
+      redirect("/login");
+    }
+
     throw new Error(response.message || "Failed to load user data");
   }
 

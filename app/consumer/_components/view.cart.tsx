@@ -127,12 +127,12 @@ export default function CartPage() {
   );
 
   return (
-    <div className="min-h-screen bg-gray-50 px-6 py-10">
+    <div className="min-h-screen bg-[var(--background)] px-6 py-10">
       <div className="max-w-6xl mx-auto">
-        <h1 className="text-3xl font-bold mb-8 text-gray-800">🛒 Your Cart</h1>
+        <h1 className="text-3xl font-bold mb-8 text-[var(--foreground)]">🛒 Your Cart</h1>
 
         {cartItems.length === 0 ? (
-          <div className="bg-white p-10 rounded-xl shadow text-center text-gray-500">
+          <div className="bg-[var(--card-bg)] p-10 rounded-xl shadow text-center text-[var(--secondary-foreground)]">
             Your cart is empty.
           </div>
         ) : (
@@ -142,10 +142,10 @@ export default function CartPage() {
               {cartItems.map((item) => (
                 <div
                   key={item._id}
-                  className="bg-white rounded-xl shadow p-6 flex gap-6 items-center"
+                  className="bg-[var(--card-bg)] rounded-xl shadow p-6 flex gap-6 items-center"
                 >
                   {/* Image */}
-                  <div className="w-28 h-28 bg-gray-100 rounded-lg flex items-center justify-center">
+                  <div className="w-28 h-28 bg-[var(--secondary)] rounded-lg flex items-center justify-center">
                     {item.product_image ? (
                       <img
                         src={`http://localhost:2000${item.product_image}`}
@@ -159,10 +159,10 @@ export default function CartPage() {
 
                   {/* Details */}
                   <div className="flex-1">
-                    <h2 className="text-lg font-semibold text-gray-800">
+                    <h2 className="text-lg font-semibold text-[var(--foreground)]">
                       {item.productName}
                     </h2>
-                    <p className="text-green-600 font-medium mt-1">
+                    <p className="text-[var(--primary)] font-medium mt-1">
                       Rs. {item.price} / {item.unitType}
                     </p>
 
@@ -170,7 +170,7 @@ export default function CartPage() {
                     <div className="flex items-center gap-3 mt-4">
                       <button
                         onClick={() => handleDecrement(item._id)}
-                        className="w-8 h-8 bg-gray-200 rounded flex items-center justify-center"
+                        className="w-8 h-8 bg-[var(--secondary)] rounded flex items-center justify-center"
                       >
                         −
                       </button>
@@ -181,7 +181,7 @@ export default function CartPage() {
 
                       <button
                         onClick={() => handleIncrement(item._id)}
-                        className="w-8 h-8 bg-gray-200 rounded flex items-center justify-center"
+                        className="w-8 h-8 bg-[var(--secondary)] rounded flex items-center justify-center"
                       >
                         +
                       </button>
@@ -190,7 +190,7 @@ export default function CartPage() {
 
                   {/* Price & Remove */}
                   <div className="text-right">
-                    <p className="font-semibold text-gray-800">
+                    <p className="font-semibold text-[var(--foreground)]">
                       Rs. {item.price * item.quantity}
                     </p>
 
@@ -206,30 +206,30 @@ export default function CartPage() {
             </div>
 
             {/* Order Summary */}
-            <div className="bg-white rounded-xl shadow p-6 h-fit">
-              <h2 className="text-xl font-semibold mb-4 text-gray-800">
+            <div className="bg-[var(--card-bg)] rounded-xl shadow p-6 h-fit">
+              <h2 className="text-xl font-semibold mb-4 text-[var(--foreground)]">
                 Order Summary
               </h2>
 
-              <div className="flex justify-between mb-3 text-gray-600">
+              <div className="flex justify-between mb-3 text-[var(--secondary-foreground)]">
                 <span>Subtotal</span>
                 <span>Rs. {totalAmount}</span>
               </div>
 
-              <div className="flex justify-between mb-3 text-gray-600">
+              <div className="flex justify-between mb-3 text-[var(--secondary-foreground)]">
                 <span>Delivery</span>
                 <span>Rs. 0</span>
               </div>
 
-              <hr className="my-4" />
+              <hr className="my-4 border-[var(--border)]" />
 
-              <div className="flex justify-between font-bold text-lg text-gray-800">
+              <div className="flex justify-between font-bold text-lg text-[var(--foreground)]">
                 <span>Total</span>
                 <span>Rs. {totalAmount}</span>
               </div>
 
               <button
-                className="w-full mt-6 bg-green-600 hover:bg-green-700 text-white py-3 rounded-lg font-semibold transition"
+                className="w-full mt-6 bg-[var(--primary)] hover:bg-[var(--primary-dark)] text-white py-3 rounded-lg font-semibold transition"
                 onClick={() => {
                   router.push("/consumer/checkout");
                 }}
