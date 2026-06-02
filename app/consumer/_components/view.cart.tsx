@@ -148,7 +148,7 @@ export default function CartPage() {
                   <div className="w-28 h-28 bg-[var(--secondary)] rounded-lg flex items-center justify-center">
                     {item.product_image ? (
                       <img
-                        src={`http://localhost:2000${item.product_image}`}
+                        src={process.env.NEXT_PUBLIC_API_BASE_URL + item.product_image}
                         alt={item.productName}
                         className="w-full h-full object-cover rounded-lg"
                       />

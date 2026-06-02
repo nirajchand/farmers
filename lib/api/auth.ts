@@ -4,7 +4,6 @@ import { API } from "./endpoints";
 export const register = async (registerData: any) => {
   try {
     const response = await axios.post(API.AUTH.REGISTER, registerData);
-    console.log(response.data);
     return response.data;
   } catch (err: Error | any) {
     throw new Error(

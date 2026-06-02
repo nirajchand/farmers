@@ -10,7 +10,6 @@ const axiosInstance = axios.create({
     }
 })
 
-
 axiosInstance.interceptors.request.use(
     async (config) => {
         const token = await getAuthToken();
